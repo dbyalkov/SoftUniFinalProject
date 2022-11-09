@@ -22,7 +22,7 @@
 
         public class Glass
         {
-            public const int MaxNameLength = 40;
+            public const int MaxNameLength = 30;
             public const int MinNameLength = 1;
         }
     }
