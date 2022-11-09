@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using static WebApp501.Infrastructure.Data.DataConstants.Cocktail;
+
 namespace WebApp501.Infrastructure.Data.Entities
 {
     public class Cocktail
@@ -9,27 +11,36 @@ namespace WebApp501.Infrastructure.Data.Entities
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        [MaxLength(MaxNameLength)]
+        public string Name { get; set; } = null!;
 
         [Required]
-        public string Recipe { get; set; }
+        [MaxLength(MaxRecipeLength)]
+        public string Recipe { get; set; } = null!;
 
         [Required]
-        public string Preparation { get; set; }
+        [MaxLength(MaxPreparationLength)]
+        public string Preparation { get; set; } = null!;
 
         [Required]
-        public string ImageUrl { get; set; }
+        public string ImageUrl { get; set; } = null!;
 
         [Required]
         public int AlcoholId { get; set; }
 
         [ForeignKey(nameof(AlcoholId))]
-        public TypeOfAlcohol Alcohol { get; set; }
+        public TypeOfAlcohol Alcohol { get; set; } = null!;
 
         [Required]
         public int BartenderId { get; set; }
 
         [ForeignKey(nameof(BartenderId))]
         public Bartender Bartender { get; set; }
+
+        [Required]
+        public int GlassId { get; set; }
+
+        [ForeignKey(nameof(GlassId))]
+        public Glass Glass { get; set; }
     }
 }

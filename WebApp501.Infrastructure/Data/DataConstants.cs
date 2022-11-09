@@ -5,16 +5,25 @@
         public class Alcohol
         {
             public const int MaxNameLength = 30;
-            public const int MinNameLength = 2;
+            public const int MinNameLength = 1;
         }
 
         public class Cocktail
         {
-            public const int MaxNameLength = 30;
-            public const int MinNameLength = 2;
+            public const int MaxNameLength = 40;
+            public const int MinNameLength = 1;
 
-            public const int MaxRecipeLength = 0;
-            public const int MinRecipeLength = 0;
+            public const int MaxRecipeLength = 100;
+            public const int MinRecipeLength = 10;
+
+            public const int MaxPreparationLength = 2000;
+            public const int MinPreparationLength = 10;
+        }
+
+        public class Glass
+        {
+            public const int MaxNameLength = 40;
+            public const int MinNameLength = 1;
         }
     }
 }
