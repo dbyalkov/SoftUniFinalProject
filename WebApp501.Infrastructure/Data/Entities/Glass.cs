@@ -15,5 +15,7 @@ namespace WebApp501.Infrastructure.Data.Entities
 
         [Required]
         public string ImageUrl { get; set; } = null!;
+
+        public IEnumerable<Cocktail> Cocktails { get; set; } = new List<Cocktail>();
     }
 }
