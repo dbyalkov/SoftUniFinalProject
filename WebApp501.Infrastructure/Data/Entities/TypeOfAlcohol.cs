@@ -13,6 +13,8 @@ namespace WebApp501.Infrastructure.Data.Entities
         [MaxLength(MaxNameLength)]
         public string Name { get; set; } = null!;
 
+        public bool? IsDeleted { get; set; } = false;
+
         public IEnumerable<Cocktail> Cocktails { get; set; } = new List<Cocktail>();
     }
 }

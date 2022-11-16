@@ -22,8 +22,7 @@ namespace WebApp501.Infrastructure.Data.Entities
         [MaxLength(MaxPreparationLength)]
         public string Preparation { get; set; } = null!;
 
-        [Required]
-        public string ImageUrl { get; set; } = null!;
+        public string? ImageUrl { get; set; }
 
         [Required]
         public int AlcoholId { get; set; }
@@ -35,12 +34,13 @@ namespace WebApp501.Infrastructure.Data.Entities
         public int BartenderId { get; set; }
 
         [ForeignKey(nameof(BartenderId))]
-        public Bartender Bartender { get; set; }
+        public Bartender Bartender { get; set; } = null!;
 
-        [Required]
-        public int GlassId { get; set; }
+        public int? GlassId { get; set; }
 
         [ForeignKey(nameof(GlassId))]
-        public Glass Glass { get; set; }
+        public Glass? Glass { get; set; }
+
+        public bool? IsDeleted { get; set; } = false;
     }
 }

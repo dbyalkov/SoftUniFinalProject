@@ -27,7 +27,7 @@ namespace WebApp501.Infrastructure.Data.Common
             return this.Context.Set<T>();
         }
 
-        public Repository(WebApp501DbContext context)
+        public Repository(WebAppDbContext context)
         {
             Context = context;
         }
