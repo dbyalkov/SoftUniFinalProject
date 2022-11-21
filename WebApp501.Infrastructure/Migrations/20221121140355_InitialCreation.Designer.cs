@@ -12,8 +12,8 @@ using WebApp501.Infrastructure.Data;
 namespace WebApp501.Infrastructure.Migrations
 {
     [DbContext(typeof(WebAppDbContext))]
-    [Migration("20221116140654_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20221121140355_InitialCreation")]
+    partial class InitialCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -145,15 +145,15 @@ namespace WebApp501.Infrastructure.Migrations
                         {
                             Id = "726719c4-8995-4426-9c00-1cb0831621d4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f0fc2768-bdb7-40b6-8d19-4604f97f5839",
+                            ConcurrencyStamp = "45a91f60-1c83-43dd-b291-30131bfd125b",
                             Email = "dbyalkov@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DBYALKOV@ABV.BG",
                             NormalizedUserName = "DBYALKOV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBKx8gzJzZTFJvKz15p2wfXIfac+bSorNZRESZi29p4y8Q5lsIVxYa5bERczkl61Gg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFww/msVl6j1GfJliWu+eg8pB4PIjMex167v4bKeJW8WmKs9y34xV0wEUUdOebRzrg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "11613833-e39f-48dc-b919-32a7b7beb483",
+                            SecurityStamp = "350f5b81-5f79-4a7e-bee6-1e5f5fa2d100",
                             TwoFactorEnabled = false,
                             UserName = "dbyalkov"
                         },
@@ -161,15 +161,15 @@ namespace WebApp501.Infrastructure.Migrations
                         {
                             Id = "30342ffd-ffd8-4e66-9348-da6a2068856e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9ad90eea-f6e6-4d2d-b2ec-7f6cb056749b",
+                            ConcurrencyStamp = "3f49d11c-cca1-4e75-a73e-e46931a28bf9",
                             Email = "doomar@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DOOMAR@ABV.BG",
                             NormalizedUserName = "D00M3R",
-                            PasswordHash = "AQAAAAEAACcQAAAAECJb8N+uEyRXhJ51sgVQKza9uM0vOMr9YIHu75nX5tpj0zNwEMW8oDhtXrBhKk+PPg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMpeSgGWtNqwzIMYukj7WRBFMNqTRjnUliM1XyC4FviM0nYqPdBAZk9dn78UKHoZMw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "567be458-be98-4c03-bc86-4cdb6fb5f14f",
+                            SecurityStamp = "b87b4ada-d7bc-4ec4-b507-e1967a09aef4",
                             TwoFactorEnabled = false,
                             UserName = "d00m3r"
                         });
@@ -260,21 +260,6 @@ namespace WebApp501.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.AlcoholCocktail", b =>
-                {
-                    b.Property<int>("AlcoholId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CocktailId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AlcoholId", "CocktailId");
-
-                    b.HasIndex("CocktailId");
-
-                    b.ToTable("AlcoholsCocktails");
-                });
-
             modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Bartender", b =>
                 {
                     b.Property<int>("Id")
@@ -338,10 +323,10 @@ namespace WebApp501.Infrastructure.Migrations
                     b.Property<int?>("GlassId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ImageId")
+                        .HasColumnType("int");
 
-                    b.Property<bool?>("IsDeleted")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -367,6 +352,8 @@ namespace WebApp501.Infrastructure.Migrations
 
                     b.HasIndex("GlassId");
 
+                    b.HasIndex("ImageId");
+
                     b.ToTable("Cocktails");
 
                     b.HasData(
@@ -376,7 +363,7 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 1,
                             BartenderId = 1,
                             GlassId = 1,
-                            ImageUrl = "https://www.google.com/search?q=Cocktail+Gauguin&hl=en&sxsrf=ALiCzsYZijqseouEFjzKEYTw-66_8uzpsA%3A1668594209334&ei=Ibp0Y5P1E_GTxc8PpdmT8AI&ved=0ahUKEwjTifzovbL7AhXxSfEDHaXsBC4Q4dUDCA8&uact=5&oq=Cocktail+Gauguin&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIECCMQJzIGCAAQFhAeOgoIABBHENYEELADOgcIABCwAxBDOg0IABDkAhDWBBCwAxgBOhIILhDHARDRAxDIAxCwAxBDGAI6FQguEMcBENEDENQCEMgDELADEEMYAjoECAAQQzoKCC4QxwEQ0QMQQzoQCC4QgAQQhwIQxwEQ0QMQFDoFCAAQgAQ6CwguEIAEEMcBENEDOgcILhDUAhBDOggILhCABBDUAjoKCC4Q1AIQgAQQQzoICAAQgAQQyQM6DgguEIAEEMcBEK8BEMsBSgQIQRgASgQIRhgBUNIJWNQmYKUuaARwAXgAgAGNAYgBmQmSAQQwLjEwmAEAoAEBoAECyAERwAEB2gEGCAEQARgJ2gEGCAIQARgI&sclient=gws-wiz-serp",
+                            ImageId = 1,
                             IsDeleted = false,
                             Name = "Gauguin",
                             Preparation = "Place the crushed ice, rum, syrup and lemon juice in a blender and blend on low speed for 15 seconds. Strain the resulting mixture into an old fashioned glass and garnish with the cocktail cherry.",
@@ -410,7 +397,7 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 4,
                             BartenderId = 1,
                             GlassId = 4,
-                            ImageUrl = "https://www.google.com/search?q=sex+on+the+beach+cocktail&hl=en&sxsrf=ALiCzsbVoUJDMmVhnd712I2_OEi4zn8HKQ%3A1668597389724&ei=jcZ0Y8DaK7CWxc8P7pS3uAs&gs_ssp=eJzj4tLP1TcwKsqotCg2YHRg8JIsTq1QyM9TKMlIVUhKTUzOUEjOT84uSczMAQAB0Q0_&oq=Sex+on+the+Beach+&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgAMgcILhCABBBDMgQIABBDMggILhCABBDLATIICAAQgAQQywEyBQgAEIAEMgQIABBDMgQIABBDMgUIABCABDIFCAAQgAQyCggAEIAEEIcCEBRKBAhBGABKBAhGGABQAFi5A2DBIGgAcAF4AIABnQGIAY4CkgEDMC4ymAEAoAECoAEBwAEB&sclient=gws-wiz-serp",
+                            ImageId = 2,
                             IsDeleted = false,
                             Name = "Sex on the Beach",
                             Preparation = "Add a few ice cubes to the shaker along with the vodka, schnapps, cranberry juice, orange juice and pineapple juice (if desired) and shake well. Put 3-4 ice cubes in a tall glass and pour the resulting mixture over them. Finally, garnish the drink with the green lemon slices and the orange slices and serve the cocktail with a straw.",
@@ -422,7 +409,7 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 5,
                             BartenderId = 1,
                             GlassId = 1,
-                            ImageUrl = "https://www.google.com/search?q=rhett+butler+cocktail&hl=en&sxsrf=ALiCzsbUCF-euUThMys6PTAiPP0xK4V37w%3A1668595185273&ei=8b10Y6ydEJqRxc8Pzo2z-As&oq=Rhett+Butler&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgBMgUIABCABDIKCAAQgAQQhwIQFDIFCAAQgAQyBQguEIAEMgUILhCABDIFCAAQgAQyBQgAEIAEMgUIABCABDILCC4QgAQQxwEQrwEyBQgAEIAESgQIQRgASgQIRhgAUABYAGCfF2gAcAF4AIABqQKIAakCkgEDMi0xmAEAoAECoAEBwAEB&sclient=gws-wiz-serp",
+                            ImageId = 3,
                             IsDeleted = false,
                             Name = "Rhett Butler",
                             Preparation = "Place the ice cubes in a shaker along with the bourbon, cranberry juice, sugar syrup and lime juice and shake well. Strain the resulting mixture into an old fashioned glass filled with ice cubes, garnish with a lemon wedge and serve with a short straw.",
@@ -434,7 +421,7 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 6,
                             BartenderId = 1,
                             GlassId = 18,
-                            ImageUrl = "https://www.google.com/search?q=Cheshire+Cat+Cocktail&sxsrf=ALiCzsYnvGR_m4i19I70GL1_6ctyPC0kCg%3A1668601527470&ei=t9Z0Y62oHP-Pxc8PoaufkAM&ved=0ahUKEwjt38OK2bL7AhX_R_EDHaHVBzIQ4dUDCA8&uact=5&oq=Cheshire+Cat+Cocktail&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQgAQyBggAEBYQHjIGCAAQFhAeMggIABAWEB4QDzIFCAAQhgMyBQgAEIYDMgUIABCGAzIFCAAQhgMyBQgAEIYDOgoIABBHENYEELADOgcIABCwAxBDOg0IABDkAhDWBBCwAxgBOgwILhDIAxCwAxBDGAI6DwguENQCEMgDELADEEMYAjoECAAQQzoICAAQgAQQywE6BQghEKABSgQIQRgASgQIRhgBUJcBWN8qYN0uaANwAXgAgAGTAYgB8gmSAQQxLjEwmAEAoAEByAETwAEB2gEGCAEQARgJ2gEGCAIQARgI&sclient=gws-wiz-serp",
+                            ImageId = 4,
                             IsDeleted = false,
                             Name = "Cheshire Cat",
                             Preparation = "Put the ice cubes in a serving glass, pour over them the brandy, vermouth and orange juice and stir until a homogeneous mixture is obtained. Strain the resulting mixture into a tall champagne glass and top up with champagne. Squeeze the essential oil from one orange peel into the drink and garnish with a spiral orange peel.",
@@ -446,7 +433,7 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 7,
                             BartenderId = 1,
                             GlassId = 4,
-                            ImageUrl = "https://www.google.com/search?q=Mexicana+Cocktail&sxsrf=ALiCzsbqImQPN1VjWrRYrgZM5Fnv2oYZ3Q%3A1668601536059&ei=wNZ0Y5WXA9uIxc8P_c2z4AY&ved=0ahUKEwiV98-O2bL7AhVbRPEDHf3mDGwQ4dUDCA8&uact=5&oq=Mexicana+Cocktail&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQgAQyCAgAEIAEEMsBMggIABAWEB4QCjIGCAAQFhAeMgYIABAWEB4yCAgAEBYQHhAKMgYIABAWEB4yCggAEBYQHhAPEAoyCAgAEBYQHhAKMgYIABAWEB46BQguEIAEOgUIIRCgAToKCAAQgAQQhwIQFDoHCAAQgAQQCjoICAAQFhAeEA9KBAhBGABKBAhGGABQAFioNWCrN2gCcAF4AIABigGIAfgJkgEEMC4xMZgBAKABAqABAcABAQ&sclient=gws-wiz-serp",
+                            ImageId = 5,
                             IsDeleted = false,
                             Name = "Mexicana",
                             Preparation = "Place half of the ice cubes in a shaker along with the tequila, raspberry liqueur and fruit juices and shake vigorously for about 10 seconds. Put the remaining ice cubes in a tall glass and pour the resulting mixture over them. Finally, garnish the drink with the pineapple and lemon slice.",
@@ -458,7 +445,7 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 8,
                             BartenderId = 1,
                             GlassId = 37,
-                            ImageUrl = "https://www.google.com/search?q=Slippery+Nipple+Cocktail&sxsrf=ALiCzsZ4y_0nwTU0wFWwU8KO1G0xUdBsSA%3A1668601931172&ei=S9h0Y9b_CYqqxc8P68qFyA4&ved=0ahUKEwiW0YPL2rL7AhUKVfEDHWtlAekQ4dUDCA8&uact=5&oq=Slippery+Nipple+Cocktail&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIKCC4QgAQQhwIQFDIFCAAQgAQyBggAEBYQHjIGCAAQFhAeMgYIABAWEB4yBggAEBYQHjIFCAAQhgMyBQgAEIYDOgYIABAHEB46BQguEIAEOgYIABAIEB5KBAhBGABKBAhGGABQAFgAYP4haABwAXgAgAGjAogBpgOSAQUwLjEuMZgBAKABAqABAcABAQ&sclient=gws-wiz-serp",
+                            ImageId = 6,
                             IsDeleted = false,
                             Name = "Slippery Nipple",
                             Preparation = "Pour the Sambuca liqueur into a tequila (shot) glass, then using the back of a bar spoon, slowly pour the Irish liqueur over the Sambuca so that the two liqueurs do not mix.",
@@ -470,7 +457,7 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 9,
                             BartenderId = 1,
                             GlassId = 20,
-                            ImageUrl = "https://www.google.com/search?q=Bitter+Sweet+Cocktail&sxsrf=ALiCzsYtnnGfQTc9sgKc8-ouqUjsQ4hILg%3A1668602388689&ei=FNp0Y7PUKc-Xxc8P0MOomA4&ved=0ahUKEwizrpil3LL7AhXPS_EDHdAhCuMQ4dUDCA8&uact=5&oq=Bitter+Sweet+Cocktail&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIGCAAQBxAeMgUIABCABDIFCAAQgAQyCAgAEAgQHhAKMgYIABAIEB4yBQgAEIYDMgUIABCGAzoLCAAQBxAeELADEAo6BwgAELADEEM6CAgAEIAEELADOgsIABCABBCwAxDLAToJCAAQCBAeELADOgwILhDIAxCwAxBDGAE6DwguENQCEMgDELADEEMYAUoECEEYAUoECEYYAVDHggtYx4ILYJ6MC2gBcAB4AIABfIgBfJIBAzAuMZgBAKABAqABAcgBEsABAdoBBggBEAEYCA&sclient=gws-wiz-serp",
+                            ImageId = 7,
                             IsDeleted = false,
                             Name = "Bitter Sweet",
                             Preparation = "Put the crushed ice in a shaker, pour on it 2 tbsp of the sparkling water and bitters, add the mint leaves and mix until frost forms. Pour the resulting mixture into a chilled glass, fill it with sparkling water and decorate the drink with slices of green or yellow lemon.",
@@ -490,7 +477,7 @@ namespace WebApp501.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("IsDeleted")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -764,6 +751,69 @@ namespace WebApp501.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Images");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImageUrl = "https://www.google.com/search?q=Cocktail+Gauguin&hl=en&sxsrf=ALiCzsYZijqseouEFjzKEYTw-66_8uzpsA%3A1668594209334&ei=Ibp0Y5P1E_GTxc8PpdmT8AI&ved=0ahUKEwjTifzovbL7AhXxSfEDHaXsBC4Q4dUDCA8&uact=5&oq=Cocktail+Gauguin&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIECCMQJzIGCAAQFhAeOgoIABBHENYEELADOgcIABCwAxBDOg0IABDkAhDWBBCwAxgBOhIILhDHARDRAxDIAxCwAxBDGAI6FQguEMcBENEDENQCEMgDELADEEMYAjoECAAQQzoKCC4QxwEQ0QMQQzoQCC4QgAQQhwIQxwEQ0QMQFDoFCAAQgAQ6CwguEIAEEMcBENEDOgcILhDUAhBDOggILhCABBDUAjoKCC4Q1AIQgAQQQzoICAAQgAQQyQM6DgguEIAEEMcBEK8BEMsBSgQIQRgASgQIRhgBUNIJWNQmYKUuaARwAXgAgAGNAYgBmQmSAQQwLjEwmAEAoAEBoAECyAERwAEB2gEGCAEQARgJ2gEGCAIQARgI&sclient=gws-wiz-serp",
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImageUrl = "https://www.google.com/search?q=sex+on+the+beach+cocktail&hl=en&sxsrf=ALiCzsbVoUJDMmVhnd712I2_OEi4zn8HKQ%3A1668597389724&ei=jcZ0Y8DaK7CWxc8P7pS3uAs&gs_ssp=eJzj4tLP1TcwKsqotCg2YHRg8JIsTq1QyM9TKMlIVUhKTUzOUEjOT84uSczMAQAB0Q0_&oq=Sex+on+the+Beach+&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgAMgcILhCABBBDMgQIABBDMggILhCABBDLATIICAAQgAQQywEyBQgAEIAEMgQIABBDMgQIABBDMgUIABCABDIFCAAQgAQyCggAEIAEEIcCEBRKBAhBGABKBAhGGABQAFi5A2DBIGgAcAF4AIABnQGIAY4CkgEDMC4ymAEAoAECoAEBwAEB&sclient=gws-wiz-serp",
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImageUrl = "https://www.google.com/search?q=rhett+butler+cocktail&hl=en&sxsrf=ALiCzsbUCF-euUThMys6PTAiPP0xK4V37w%3A1668595185273&ei=8b10Y6ydEJqRxc8Pzo2z-As&oq=Rhett+Butler&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgBMgUIABCABDIKCAAQgAQQhwIQFDIFCAAQgAQyBQguEIAEMgUILhCABDIFCAAQgAQyBQgAEIAEMgUIABCABDILCC4QgAQQxwEQrwEyBQgAEIAESgQIQRgASgQIRhgAUABYAGCfF2gAcAF4AIABqQKIAakCkgEDMi0xmAEAoAECoAEBwAEB&sclient=gws-wiz-serp",
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImageUrl = "https://www.google.com/search?q=Cheshire+Cat+Cocktail&sxsrf=ALiCzsYnvGR_m4i19I70GL1_6ctyPC0kCg%3A1668601527470&ei=t9Z0Y62oHP-Pxc8PoaufkAM&ved=0ahUKEwjt38OK2bL7AhX_R_EDHaHVBzIQ4dUDCA8&uact=5&oq=Cheshire+Cat+Cocktail&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQgAQyBggAEBYQHjIGCAAQFhAeMggIABAWEB4QDzIFCAAQhgMyBQgAEIYDMgUIABCGAzIFCAAQhgMyBQgAEIYDOgoIABBHENYEELADOgcIABCwAxBDOg0IABDkAhDWBBCwAxgBOgwILhDIAxCwAxBDGAI6DwguENQCEMgDELADEEMYAjoECAAQQzoICAAQgAQQywE6BQghEKABSgQIQRgASgQIRhgBUJcBWN8qYN0uaANwAXgAgAGTAYgB8gmSAQQxLjEwmAEAoAEByAETwAEB2gEGCAEQARgJ2gEGCAIQARgI&sclient=gws-wiz-serp",
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ImageUrl = "https://www.google.com/search?q=Mexicana+Cocktail&sxsrf=ALiCzsbqImQPN1VjWrRYrgZM5Fnv2oYZ3Q%3A1668601536059&ei=wNZ0Y5WXA9uIxc8P_c2z4AY&ved=0ahUKEwiV98-O2bL7AhVbRPEDHf3mDGwQ4dUDCA8&uact=5&oq=Mexicana+Cocktail&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQgAQyCAgAEIAEEMsBMggIABAWEB4QCjIGCAAQFhAeMgYIABAWEB4yCAgAEBYQHhAKMgYIABAWEB4yCggAEBYQHhAPEAoyCAgAEBYQHhAKMgYIABAWEB46BQguEIAEOgUIIRCgAToKCAAQgAQQhwIQFDoHCAAQgAQQCjoICAAQFhAeEA9KBAhBGABKBAhGGABQAFioNWCrN2gCcAF4AIABigGIAfgJkgEEMC4xMZgBAKABAqABAcABAQ&sclient=gws-wiz-serp",
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ImageUrl = "https://www.google.com/search?q=Slippery+Nipple+Cocktail&sxsrf=ALiCzsZ4y_0nwTU0wFWwU8KO1G0xUdBsSA%3A1668601931172&ei=S9h0Y9b_CYqqxc8P68qFyA4&ved=0ahUKEwiW0YPL2rL7AhUKVfEDHWtlAekQ4dUDCA8&uact=5&oq=Slippery+Nipple+Cocktail&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIKCC4QgAQQhwIQFDIFCAAQgAQyBggAEBYQHjIGCAAQFhAeMgYIABAWEB4yBggAEBYQHjIFCAAQhgMyBQgAEIYDOgYIABAHEB46BQguEIAEOgYIABAIEB5KBAhBGABKBAhGGABQAFgAYP4haABwAXgAgAGjAogBpgOSAQUwLjEuMZgBAKABAqABAcABAQ&sclient=gws-wiz-serp",
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ImageUrl = "https://www.google.com/search?q=Bitter+Sweet+Cocktail&sxsrf=ALiCzsYtnnGfQTc9sgKc8-ouqUjsQ4hILg%3A1668602388689&ei=FNp0Y7PUKc-Xxc8P0MOomA4&ved=0ahUKEwizrpil3LL7AhXPS_EDHdAhCuMQ4dUDCA8&uact=5&oq=Bitter+Sweet+Cocktail&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIGCAAQBxAeMgUIABCABDIFCAAQgAQyCAgAEAgQHhAKMgYIABAIEB4yBQgAEIYDMgUIABCGAzoLCAAQBxAeELADEAo6BwgAELADEEM6CAgAEIAEELADOgsIABCABBCwAxDLAToJCAAQCBAeELADOgwILhDIAxCwAxBDGAE6DwguENQCEMgDELADEEMYAUoECEEYAUoECEYYAVDHggtYx4ILYJ6MC2gBcAB4AIABfIgBfJIBAzAuMZgBAKABAqABAcgBEsABAdoBBggBEAEYCA&sclient=gws-wiz-serp",
+                            IsDeleted = false
+                        });
+                });
+
             modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.TypeOfAlcohol", b =>
                 {
                     b.Property<int>("Id")
@@ -892,25 +942,6 @@ namespace WebApp501.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.AlcoholCocktail", b =>
-                {
-                    b.HasOne("WebApp501.Infrastructure.Data.Entities.TypeOfAlcohol", "Alcohol")
-                        .WithMany()
-                        .HasForeignKey("AlcoholId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebApp501.Infrastructure.Data.Entities.Cocktail", "Cocktail")
-                        .WithMany()
-                        .HasForeignKey("CocktailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Alcohol");
-
-                    b.Navigation("Cocktail");
-                });
-
             modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Bartender", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
@@ -941,11 +972,18 @@ namespace WebApp501.Infrastructure.Migrations
                         .HasForeignKey("GlassId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("WebApp501.Infrastructure.Data.Entities.Image", "Image")
+                        .WithMany("Cocktails")
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.Navigation("Alcohol");
 
                     b.Navigation("Bartender");
 
                     b.Navigation("Glass");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Bartender", b =>
@@ -954,6 +992,11 @@ namespace WebApp501.Infrastructure.Migrations
                 });
 
             modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Glass", b =>
+                {
+                    b.Navigation("Cocktails");
+                });
+
+            modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Image", b =>
                 {
                     b.Navigation("Cocktails");
                 });

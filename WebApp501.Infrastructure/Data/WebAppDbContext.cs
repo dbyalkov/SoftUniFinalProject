@@ -16,13 +16,16 @@ namespace WebApp501.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
-                .Entity<AlcoholCocktail>()
-                .HasKey(ac => new { ac.AlcoholId, ac.CocktailId });
+                .Entity<Cocktail>()
+                .HasOne(c => c.Image)
+                .WithMany(i => i.Cocktails)
+                .HasForeignKey(c => c.ImageId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder
                 .Entity<Cocktail>()
                 .HasOne(c => c.Alcohol)
-                .WithMany()
+                .WithMany(a => a.Cocktails)
                 .HasForeignKey(c => c.AlcoholId)
                 .OnDelete(DeleteBehavior.NoAction);
 
@@ -41,15 +44,16 @@ namespace WebApp501.Infrastructure.Data
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.ApplyConfiguration(new UserConfiguration());
-            builder.ApplyConfiguration(new BartenderConfiguration());
+            builder.ApplyConfiguration(new ImageConfiguration());
             builder.ApplyConfiguration(new AlcoholConfiguration());
+            builder.ApplyConfiguration(new BartenderConfiguration());
             builder.ApplyConfiguration(new GlassConfiguration());
             builder.ApplyConfiguration(new CocktailConfiguration());
 
             base.OnModelCreating(builder);
         }
 
-        public DbSet<AlcoholCocktail> AlcoholsCocktails { get; set; } = null!;
+        public DbSet<Image> Images { get; set; } = null!;
 
         public DbSet<Bartender> Bartenders { get; set; } = null!;
 

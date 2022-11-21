@@ -22,7 +22,10 @@ namespace WebApp501.Infrastructure.Data.Entities
         [MaxLength(MaxPreparationLength)]
         public string Preparation { get; set; } = null!;
 
-        public string? ImageUrl { get; set; }
+        public int? ImageId { get; set; }
+
+        [ForeignKey(nameof(ImageId))]
+        public Image? Image { get; set; }
 
         [Required]
         public int AlcoholId { get; set; }
@@ -41,6 +44,6 @@ namespace WebApp501.Infrastructure.Data.Entities
         [ForeignKey(nameof(GlassId))]
         public Glass? Glass { get; set; }
 
-        public bool? IsDeleted { get; set; } = false;
+        public bool IsDeleted { get; set; } = false;
     }
 }
