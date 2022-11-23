@@ -10,6 +10,24 @@ namespace WebApp501.Infrastructure.Data.Configuration
         public void Configure(EntityTypeBuilder<Cocktail> builder)
         {
             builder
+                .HasOne(c => c.Alcohol)
+                .WithMany(a => a.Cocktails)
+                .HasForeignKey(c => c.AlcoholId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder
+                .HasOne(c => c.Bartender)
+                .WithMany(b => b.Cocktails)
+                .HasForeignKey(c => c.BartenderId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder
+                .HasOne(c => c.Glass)
+                .WithMany(g => g.Cocktails)
+                .HasForeignKey(c => c.GlassId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder
                 .HasData(CreateCocktails());
         }
 
