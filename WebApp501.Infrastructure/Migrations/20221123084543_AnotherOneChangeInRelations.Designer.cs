@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp501.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using WebApp501.Infrastructure.Data;
 namespace WebApp501.Infrastructure.Migrations
 {
     [DbContext(typeof(WebAppDbContext))]
-    partial class WebAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221123084543_AnotherOneChangeInRelations")]
+    partial class AnotherOneChangeInRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +23,21 @@ namespace WebApp501.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("CocktailImage", b =>
+                {
+                    b.Property<int>("CocktailsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ImagesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CocktailsId", "ImagesId");
+
+                    b.HasIndex("ImagesId");
+
+                    b.ToTable("CocktailImage");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -143,15 +160,15 @@ namespace WebApp501.Infrastructure.Migrations
                         {
                             Id = "726719c4-8995-4426-9c00-1cb0831621d4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "498056fa-1c05-4502-bcb8-05785c5abdb5",
+                            ConcurrencyStamp = "0d07fc87-a27e-44c2-8ada-bf29e34b8c2a",
                             Email = "dbyalkov@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DBYALKOV@ABV.BG",
                             NormalizedUserName = "DBYALKOV",
-                            PasswordHash = "AQAAAAEAACcQAAAAELT4M/kW1Qjvugry8Zz2lyszh5CdeSPpUmQFdw0eY/8h9PC5G/pcCphgrBeLj6YxzQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOK9n8iRbXbXO7hLXdmEB01oBqiSAqp4YjZCr/bGi8g1lKxR8UKUUcJGRL46EGtduQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bf21dcc7-4b8f-43ec-8dc6-d7cbc1895d7c",
+                            SecurityStamp = "e0abcf47-d160-4a8e-a92e-2231797291b9",
                             TwoFactorEnabled = false,
                             UserName = "dbyalkov"
                         },
@@ -159,15 +176,15 @@ namespace WebApp501.Infrastructure.Migrations
                         {
                             Id = "30342ffd-ffd8-4e66-9348-da6a2068856e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5c4d36f8-d275-46ed-bc7d-b100edb7ebdd",
+                            ConcurrencyStamp = "b65948ef-f9e8-4066-a246-8625da62bbdd",
                             Email = "doomar@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DOOMAR@ABV.BG",
                             NormalizedUserName = "D00M3R",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHfKiTTC23v2kvHRpwPnGSzCz+GTV9yvdqpOcxXOYCbIcXZs+5VTeo5HUGt5C2V8SQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEMjG+eRQ84YgVdCrNyxnTRgwhyXcbIyG3UpRQ2OBbOvr38eC4ZaqAJN7TVtTpbxHw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d061fcac-2629-4b6f-84b6-2be4c8947cb2",
+                            SecurityStamp = "d1a7987e-1596-4ed5-8078-455bab8ba74c",
                             TwoFactorEnabled = false,
                             UserName = "d00m3r"
                         });
@@ -448,58 +465,6 @@ namespace WebApp501.Infrastructure.Migrations
                             Name = "Bitter Sweet",
                             Preparation = "Put the crushed ice in a shaker, pour on it 2 tbsp of the sparkling water and bitters, add the mint leaves and mix until frost forms. Pour the resulting mixture into a chilled glass, fill it with sparkling water and decorate the drink with slices of green or yellow lemon.",
                             Recipe = "crushed ice\r\n150 ml sparkling water\r\n2 dashes \"Angostura\" bitters\r\n6-8 mint leaves\r\ngreen or yellow lemon circles for decoration"
-                        });
-                });
-
-            modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.CocktailImage", b =>
-                {
-                    b.Property<int>("CocktailId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CocktailId", "ImageId");
-
-                    b.HasIndex("ImageId");
-
-                    b.ToTable("CocktailsImages");
-
-                    b.HasData(
-                        new
-                        {
-                            CocktailId = 1,
-                            ImageId = 1
-                        },
-                        new
-                        {
-                            CocktailId = 4,
-                            ImageId = 2
-                        },
-                        new
-                        {
-                            CocktailId = 5,
-                            ImageId = 3
-                        },
-                        new
-                        {
-                            CocktailId = 6,
-                            ImageId = 4
-                        },
-                        new
-                        {
-                            CocktailId = 7,
-                            ImageId = 5
-                        },
-                        new
-                        {
-                            CocktailId = 8,
-                            ImageId = 6
-                        },
-                        new
-                        {
-                            CocktailId = 9,
-                            ImageId = 7
                         });
                 });
 
@@ -929,6 +894,21 @@ namespace WebApp501.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CocktailImage", b =>
+                {
+                    b.HasOne("WebApp501.Infrastructure.Data.Entities.Cocktail", null)
+                        .WithMany()
+                        .HasForeignKey("CocktailsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApp501.Infrastructure.Data.Entities.Image", null)
+                        .WithMany()
+                        .HasForeignKey("ImagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -1017,43 +997,14 @@ namespace WebApp501.Infrastructure.Migrations
                     b.Navigation("Glass");
                 });
 
-            modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.CocktailImage", b =>
-                {
-                    b.HasOne("WebApp501.Infrastructure.Data.Entities.Cocktail", "Cocktail")
-                        .WithMany("CocktailImages")
-                        .HasForeignKey("CocktailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebApp501.Infrastructure.Data.Entities.Image", "Image")
-                        .WithMany("ImageCocktails")
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cocktail");
-
-                    b.Navigation("Image");
-                });
-
             modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Bartender", b =>
                 {
                     b.Navigation("Cocktails");
                 });
 
-            modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Cocktail", b =>
-                {
-                    b.Navigation("CocktailImages");
-                });
-
             modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Glass", b =>
                 {
                     b.Navigation("Cocktails");
-                });
-
-            modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Image", b =>
-                {
-                    b.Navigation("ImageCocktails");
                 });
 
             modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.TypeOfAlcohol", b =>

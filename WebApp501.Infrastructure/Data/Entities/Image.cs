@@ -11,6 +11,6 @@ namespace WebApp501.Infrastructure.Data.Entities
 
         public bool IsDeleted { get; set; } = false;
 
-        public IEnumerable<Cocktail> Cocktails { get; set; } = new List<Cocktail>();
+        public IEnumerable<CocktailImage> ImageCocktails { get; set; } = new List<CocktailImage>();
     }
 }

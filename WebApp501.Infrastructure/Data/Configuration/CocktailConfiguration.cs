@@ -28,7 +28,6 @@ namespace WebApp501.Infrastructure.Data.Configuration
                              "1 tsp lime juice\r\n" +
                              "1 cocktail cherry for decoration",
                     Preparation = "Place the crushed ice, rum, syrup and lemon juice in a blender and blend on low speed for 15 seconds. Strain the resulting mixture into an old fashioned glass and garnish with the cocktail cherry.",
-                    ImageId = 1,
                     AlcoholId = 1,
                     BartenderId = 1,
                     GlassId = 1
@@ -76,7 +75,6 @@ namespace WebApp501.Infrastructure.Data.Configuration
                              "orange slices for decoration\r\n" +
                              "slices of green lemon for decoration",
                     Preparation = "Add a few ice cubes to the shaker along with the vodka, schnapps, cranberry juice, orange juice and pineapple juice (if desired) and shake well. Put 3-4 ice cubes in a tall glass and pour the resulting mixture over them. Finally, garnish the drink with the green lemon slices and the orange slices and serve the cocktail with a straw.",
-                    ImageId = 2,
                     AlcoholId = 4,
                     BartenderId = 1,
                     GlassId = 4
@@ -92,7 +90,6 @@ namespace WebApp501.Infrastructure.Data.Configuration
                              "1 tbsp fresh lemon juice\r\n" +
                              "a slice of green lemon for garnish",
                     Preparation = "Place the ice cubes in a shaker along with the bourbon, cranberry juice, sugar syrup and lime juice and shake well. Strain the resulting mixture into an old fashioned glass filled with ice cubes, garnish with a lemon wedge and serve with a short straw.",
-                    ImageId = 3,
                     AlcoholId = 5,
                     BartenderId = 1,
                     GlassId = 1
@@ -107,7 +104,6 @@ namespace WebApp501.Infrastructure.Data.Configuration
                              "champagne\r\n" +
                              "orange peels for garnish",
                     Preparation = "Put the ice cubes in a serving glass, pour over them the brandy, vermouth and orange juice and stir until a homogeneous mixture is obtained. Strain the resulting mixture into a tall champagne glass and top up with champagne. Squeeze the essential oil from one orange peel into the drink and garnish with a spiral orange peel.",
-                    ImageId = 4,
                     AlcoholId = 6,
                     BartenderId = 1,
                     GlassId = 18
@@ -124,7 +120,6 @@ namespace WebApp501.Infrastructure.Data.Configuration
                              "pineapple slice for garnish\r\n" +
                              "lemon slice for garnish",
                     Preparation = "Place half of the ice cubes in a shaker along with the tequila, raspberry liqueur and fruit juices and shake vigorously for about 10 seconds. Put the remaining ice cubes in a tall glass and pour the resulting mixture over them. Finally, garnish the drink with the pineapple and lemon slice.",
-                    ImageId = 5,
                     AlcoholId = 7,
                     BartenderId = 1,
                     GlassId = 4
@@ -136,7 +131,6 @@ namespace WebApp501.Infrastructure.Data.Configuration
                     Recipe = "1 part \"Sambuca\" liqueur\r\n" +
                              "1/2 part Baileys Irish Liqueur",
                     Preparation = "Pour the Sambuca liqueur into a tequila (shot) glass, then using the back of a bar spoon, slowly pour the Irish liqueur over the Sambuca so that the two liqueurs do not mix.",
-                    ImageId = 6,
                     AlcoholId = 8,
                     BartenderId = 1,
                     GlassId = 37
@@ -151,7 +145,6 @@ namespace WebApp501.Infrastructure.Data.Configuration
                              "6-8 mint leaves\r\n" +
                              "green or yellow lemon circles for decoration",
                     Preparation = "Put the crushed ice in a shaker, pour on it 2 tbsp of the sparkling water and bitters, add the mint leaves and mix until frost forms. Pour the resulting mixture into a chilled glass, fill it with sparkling water and decorate the drink with slices of green or yellow lemon.",
-                    ImageId = 7,
                     AlcoholId = 9,
                     BartenderId = 1,
                     GlassId = 20

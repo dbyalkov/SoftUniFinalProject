@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp501.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using WebApp501.Infrastructure.Data;
 namespace WebApp501.Infrastructure.Migrations
 {
     [DbContext(typeof(WebAppDbContext))]
-    partial class WebAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221123091555_YetAnotherChange")]
+    partial class YetAnotherChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,15 +145,15 @@ namespace WebApp501.Infrastructure.Migrations
                         {
                             Id = "726719c4-8995-4426-9c00-1cb0831621d4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "498056fa-1c05-4502-bcb8-05785c5abdb5",
+                            ConcurrencyStamp = "207c89e1-73be-4bf1-b341-6d348c220f5c",
                             Email = "dbyalkov@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DBYALKOV@ABV.BG",
                             NormalizedUserName = "DBYALKOV",
-                            PasswordHash = "AQAAAAEAACcQAAAAELT4M/kW1Qjvugry8Zz2lyszh5CdeSPpUmQFdw0eY/8h9PC5G/pcCphgrBeLj6YxzQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMa3F5XVCrQQMeUrbkWjYJyhztCBk4qvQrgknuQLdpUJVTdfiDDz+ho+FYlkkgJjow==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bf21dcc7-4b8f-43ec-8dc6-d7cbc1895d7c",
+                            SecurityStamp = "daf555ff-30c1-4058-a8f0-929e3fa2bbab",
                             TwoFactorEnabled = false,
                             UserName = "dbyalkov"
                         },
@@ -159,15 +161,15 @@ namespace WebApp501.Infrastructure.Migrations
                         {
                             Id = "30342ffd-ffd8-4e66-9348-da6a2068856e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5c4d36f8-d275-46ed-bc7d-b100edb7ebdd",
+                            ConcurrencyStamp = "b1ed5a42-d8f8-4d87-b4a9-52688939d9ab",
                             Email = "doomar@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DOOMAR@ABV.BG",
                             NormalizedUserName = "D00M3R",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHfKiTTC23v2kvHRpwPnGSzCz+GTV9yvdqpOcxXOYCbIcXZs+5VTeo5HUGt5C2V8SQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDaQGZUmUaLJcdnrVlDdIqRO+9HKqxAQhIxxztleLdglMm+FxXMj0lrAEdqhn4piuA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d061fcac-2629-4b6f-84b6-2be4c8947cb2",
+                            SecurityStamp = "16d735fa-92f9-4626-84d6-476686b3fe80",
                             TwoFactorEnabled = false,
                             UserName = "d00m3r"
                         });
@@ -464,43 +466,6 @@ namespace WebApp501.Infrastructure.Migrations
                     b.HasIndex("ImageId");
 
                     b.ToTable("CocktailsImages");
-
-                    b.HasData(
-                        new
-                        {
-                            CocktailId = 1,
-                            ImageId = 1
-                        },
-                        new
-                        {
-                            CocktailId = 4,
-                            ImageId = 2
-                        },
-                        new
-                        {
-                            CocktailId = 5,
-                            ImageId = 3
-                        },
-                        new
-                        {
-                            CocktailId = 6,
-                            ImageId = 4
-                        },
-                        new
-                        {
-                            CocktailId = 7,
-                            ImageId = 5
-                        },
-                        new
-                        {
-                            CocktailId = 8,
-                            ImageId = 6
-                        },
-                        new
-                        {
-                            CocktailId = 9,
-                            ImageId = 7
-                        });
                 });
 
             modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Glass", b =>

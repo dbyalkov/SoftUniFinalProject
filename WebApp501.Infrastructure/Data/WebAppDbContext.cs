@@ -17,13 +17,6 @@ namespace WebApp501.Infrastructure.Data
         {
             builder
                 .Entity<Cocktail>()
-                .HasOne(c => c.Image)
-                .WithMany(i => i.Cocktails)
-                .HasForeignKey(c => c.ImageId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder
-                .Entity<Cocktail>()
                 .HasOne(c => c.Alcohol)
                 .WithMany(a => a.Cocktails)
                 .HasForeignKey(c => c.AlcoholId)
@@ -49,6 +42,7 @@ namespace WebApp501.Infrastructure.Data
             builder.ApplyConfiguration(new BartenderConfiguration());
             builder.ApplyConfiguration(new GlassConfiguration());
             builder.ApplyConfiguration(new CocktailConfiguration());
+            builder.ApplyConfiguration(new CocktailImageConfiguration());
 
             base.OnModelCreating(builder);
         }
@@ -62,5 +56,7 @@ namespace WebApp501.Infrastructure.Data
         public DbSet<Glass> Glasses { get; set; } = null!;
 
         public DbSet<TypeOfAlcohol> Alcohols { get; set; } = null!;
+
+        public DbSet<CocktailImage> CocktailsImages { get; set; }
     }
 }

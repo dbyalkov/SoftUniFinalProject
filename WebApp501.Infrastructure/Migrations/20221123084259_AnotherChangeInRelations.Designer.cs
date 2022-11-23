@@ -12,8 +12,8 @@ using WebApp501.Infrastructure.Data;
 namespace WebApp501.Infrastructure.Migrations
 {
     [DbContext(typeof(WebAppDbContext))]
-    [Migration("20221121140355_InitialCreation")]
-    partial class InitialCreation
+    [Migration("20221123084259_AnotherChangeInRelations")]
+    partial class AnotherChangeInRelations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,21 @@ namespace WebApp501.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("CocktailImage", b =>
+                {
+                    b.Property<int>("CocktailsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ImagesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CocktailsId", "ImagesId");
+
+                    b.HasIndex("ImagesId");
+
+                    b.ToTable("CocktailImage");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -145,15 +160,15 @@ namespace WebApp501.Infrastructure.Migrations
                         {
                             Id = "726719c4-8995-4426-9c00-1cb0831621d4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "45a91f60-1c83-43dd-b291-30131bfd125b",
+                            ConcurrencyStamp = "bea75f7e-52e1-493d-a20c-791464b68713",
                             Email = "dbyalkov@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DBYALKOV@ABV.BG",
                             NormalizedUserName = "DBYALKOV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFww/msVl6j1GfJliWu+eg8pB4PIjMex167v4bKeJW8WmKs9y34xV0wEUUdOebRzrg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENYqyMPJCT4Qjw6cljsYaXcfuq6ly1mIcy0yv9X8FT3rQ5JzssZ3HjMbpIIL2QljGw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "350f5b81-5f79-4a7e-bee6-1e5f5fa2d100",
+                            SecurityStamp = "770b12e9-b6bc-4115-891a-e6ffbf5f5e86",
                             TwoFactorEnabled = false,
                             UserName = "dbyalkov"
                         },
@@ -161,15 +176,15 @@ namespace WebApp501.Infrastructure.Migrations
                         {
                             Id = "30342ffd-ffd8-4e66-9348-da6a2068856e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3f49d11c-cca1-4e75-a73e-e46931a28bf9",
+                            ConcurrencyStamp = "6866a638-9b97-4d7b-966a-9a9a9a8d9331",
                             Email = "doomar@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DOOMAR@ABV.BG",
                             NormalizedUserName = "D00M3R",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMpeSgGWtNqwzIMYukj7WRBFMNqTRjnUliM1XyC4FviM0nYqPdBAZk9dn78UKHoZMw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENI+yP245FuroPoeMZEvNwfuBB82sTTpOL5AP2+UScUeevHW5iYbaypNAKmD3kdyxw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b87b4ada-d7bc-4ec4-b507-e1967a09aef4",
+                            SecurityStamp = "49152321-1b2a-471c-9c02-b8a823a4baca",
                             TwoFactorEnabled = false,
                             UserName = "d00m3r"
                         });
@@ -323,9 +338,6 @@ namespace WebApp501.Infrastructure.Migrations
                     b.Property<int?>("GlassId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -352,8 +364,6 @@ namespace WebApp501.Infrastructure.Migrations
 
                     b.HasIndex("GlassId");
 
-                    b.HasIndex("ImageId");
-
                     b.ToTable("Cocktails");
 
                     b.HasData(
@@ -363,7 +373,6 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 1,
                             BartenderId = 1,
                             GlassId = 1,
-                            ImageId = 1,
                             IsDeleted = false,
                             Name = "Gauguin",
                             Preparation = "Place the crushed ice, rum, syrup and lemon juice in a blender and blend on low speed for 15 seconds. Strain the resulting mixture into an old fashioned glass and garnish with the cocktail cherry.",
@@ -397,7 +406,6 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 4,
                             BartenderId = 1,
                             GlassId = 4,
-                            ImageId = 2,
                             IsDeleted = false,
                             Name = "Sex on the Beach",
                             Preparation = "Add a few ice cubes to the shaker along with the vodka, schnapps, cranberry juice, orange juice and pineapple juice (if desired) and shake well. Put 3-4 ice cubes in a tall glass and pour the resulting mixture over them. Finally, garnish the drink with the green lemon slices and the orange slices and serve the cocktail with a straw.",
@@ -409,7 +417,6 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 5,
                             BartenderId = 1,
                             GlassId = 1,
-                            ImageId = 3,
                             IsDeleted = false,
                             Name = "Rhett Butler",
                             Preparation = "Place the ice cubes in a shaker along with the bourbon, cranberry juice, sugar syrup and lime juice and shake well. Strain the resulting mixture into an old fashioned glass filled with ice cubes, garnish with a lemon wedge and serve with a short straw.",
@@ -421,7 +428,6 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 6,
                             BartenderId = 1,
                             GlassId = 18,
-                            ImageId = 4,
                             IsDeleted = false,
                             Name = "Cheshire Cat",
                             Preparation = "Put the ice cubes in a serving glass, pour over them the brandy, vermouth and orange juice and stir until a homogeneous mixture is obtained. Strain the resulting mixture into a tall champagne glass and top up with champagne. Squeeze the essential oil from one orange peel into the drink and garnish with a spiral orange peel.",
@@ -433,7 +439,6 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 7,
                             BartenderId = 1,
                             GlassId = 4,
-                            ImageId = 5,
                             IsDeleted = false,
                             Name = "Mexicana",
                             Preparation = "Place half of the ice cubes in a shaker along with the tequila, raspberry liqueur and fruit juices and shake vigorously for about 10 seconds. Put the remaining ice cubes in a tall glass and pour the resulting mixture over them. Finally, garnish the drink with the pineapple and lemon slice.",
@@ -445,7 +450,6 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 8,
                             BartenderId = 1,
                             GlassId = 37,
-                            ImageId = 6,
                             IsDeleted = false,
                             Name = "Slippery Nipple",
                             Preparation = "Pour the Sambuca liqueur into a tequila (shot) glass, then using the back of a bar spoon, slowly pour the Irish liqueur over the Sambuca so that the two liqueurs do not mix.",
@@ -457,12 +461,26 @@ namespace WebApp501.Infrastructure.Migrations
                             AlcoholId = 9,
                             BartenderId = 1,
                             GlassId = 20,
-                            ImageId = 7,
                             IsDeleted = false,
                             Name = "Bitter Sweet",
                             Preparation = "Put the crushed ice in a shaker, pour on it 2 tbsp of the sparkling water and bitters, add the mint leaves and mix until frost forms. Pour the resulting mixture into a chilled glass, fill it with sparkling water and decorate the drink with slices of green or yellow lemon.",
                             Recipe = "crushed ice\r\n150 ml sparkling water\r\n2 dashes \"Angostura\" bitters\r\n6-8 mint leaves\r\ngreen or yellow lemon circles for decoration"
                         });
+                });
+
+            modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.CocktailImage", b =>
+                {
+                    b.Property<int>("CocktailId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ImageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CocktailId", "ImageId");
+
+                    b.HasIndex("ImageId");
+
+                    b.ToTable("CocktailsImages");
                 });
 
             modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Glass", b =>
@@ -891,6 +909,21 @@ namespace WebApp501.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CocktailImage", b =>
+                {
+                    b.HasOne("WebApp501.Infrastructure.Data.Entities.Cocktail", null)
+                        .WithMany()
+                        .HasForeignKey("CocktailsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApp501.Infrastructure.Data.Entities.Image", null)
+                        .WithMany()
+                        .HasForeignKey("ImagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -972,16 +1005,28 @@ namespace WebApp501.Infrastructure.Migrations
                         .HasForeignKey("GlassId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("WebApp501.Infrastructure.Data.Entities.Image", "Image")
-                        .WithMany("Cocktails")
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.Navigation("Alcohol");
 
                     b.Navigation("Bartender");
 
                     b.Navigation("Glass");
+                });
+
+            modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.CocktailImage", b =>
+                {
+                    b.HasOne("WebApp501.Infrastructure.Data.Entities.Cocktail", "Cocktail")
+                        .WithMany()
+                        .HasForeignKey("CocktailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApp501.Infrastructure.Data.Entities.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cocktail");
 
                     b.Navigation("Image");
                 });
@@ -992,11 +1037,6 @@ namespace WebApp501.Infrastructure.Migrations
                 });
 
             modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Glass", b =>
-                {
-                    b.Navigation("Cocktails");
-                });
-
-            modelBuilder.Entity("WebApp501.Infrastructure.Data.Entities.Image", b =>
                 {
                     b.Navigation("Cocktails");
                 });

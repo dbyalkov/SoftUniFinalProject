@@ -22,11 +22,6 @@ namespace WebApp501.Infrastructure.Data.Entities
         [MaxLength(MaxPreparationLength)]
         public string Preparation { get; set; } = null!;
 
-        public int? ImageId { get; set; }
-
-        [ForeignKey(nameof(ImageId))]
-        public Image? Image { get; set; }
-
         [Required]
         public int AlcoholId { get; set; }
 
@@ -45,5 +40,7 @@ namespace WebApp501.Infrastructure.Data.Entities
         public Glass? Glass { get; set; }
 
         public bool IsDeleted { get; set; } = false;
+
+        public IEnumerable<CocktailImage> CocktailImages { get; set; } = new List<CocktailImage>();
     }
 }
