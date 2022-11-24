@@ -29,7 +29,7 @@ namespace WebApp501.Infrastructure.Data.Entities
         [ForeignKey(nameof(UserId))]
         public IdentityUser User { get; set; } = null!;
 
-        public bool? IsDeleted { get; set; } = false;
+        public bool IsDeleted { get; set; } = false;
 
         public IEnumerable<Cocktail> Cocktails { get; set; } = new List<Cocktail>();
     }
