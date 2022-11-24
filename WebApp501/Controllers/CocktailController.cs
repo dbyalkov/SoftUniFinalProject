@@ -2,7 +2,7 @@
 
 namespace WebApp501.Controllers
 {
-    public class AlcoholsController : BaseController
+    public class CocktailController : BaseController
     {
         public IActionResult Index()
         {

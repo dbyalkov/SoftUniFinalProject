@@ -10,4 +10,8 @@
     <Folder Include="Constants\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WebApp501.Infrastructure\WebApp501.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

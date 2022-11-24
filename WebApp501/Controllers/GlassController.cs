@@ -2,7 +2,7 @@
 
 namespace WebApp501.Controllers
 {
-    public class GlassesController : BaseController
+    public class GlassController : BaseController
     {
         public IActionResult Index()
         {

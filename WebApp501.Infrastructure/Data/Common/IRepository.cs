@@ -38,6 +38,12 @@ namespace WebApp501.Infrastructure.Data.Common
         /// <returns>Single record</returns>
         Task<T> GetByIdAsync<T>(object id) where T : class;
 
+        /// <summary>
+        /// Gets an array of records from database by primary keys
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="id"></param>
+        /// <returns></returns>
         Task<T> GetByIdsAsync<T>(object[] id) where T : class;
 
         /// <summary>
@@ -83,6 +89,11 @@ namespace WebApp501.Infrastructure.Data.Common
         /// <param name="entities"></param>
         void DeleteRange<T>(IEnumerable<T> entities) where T : class;
 
+        /// <summary>
+        /// Deletes set of records in the database according to a clause
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="deleteWhereClause"></param>
         void DeleteRange<T>(Expression<Func<T, bool>> deleteWhereClause) where T : class;
 
         /// <summary>
