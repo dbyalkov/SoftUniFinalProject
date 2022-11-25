@@ -10,6 +10,11 @@ namespace WebApp501.Infrastructure.Data.Configuration
         public void Configure(EntityTypeBuilder<Cocktail> builder)
         {
             builder
+                .HasOne(c => c.Image)
+                .WithOne(i => i.Cocktail)
+                .HasForeignKey<Image>(i => i.CocktailId);
+
+            builder
                 .HasOne(c => c.Alcohol)
                 .WithMany(a => a.Cocktails)
                 .HasForeignKey(c => c.AlcoholId)

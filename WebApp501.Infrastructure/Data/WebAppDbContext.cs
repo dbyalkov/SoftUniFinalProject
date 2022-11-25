@@ -21,7 +21,6 @@ namespace WebApp501.Infrastructure.Data
             builder.ApplyConfiguration(new BartenderConfiguration());
             builder.ApplyConfiguration(new GlassConfiguration());
             builder.ApplyConfiguration(new CocktailConfiguration());
-            builder.ApplyConfiguration(new CocktailImageConfiguration());
 
             base.OnModelCreating(builder);
         }
@@ -35,7 +34,5 @@ namespace WebApp501.Infrastructure.Data
         public DbSet<Glass> Glasses { get; set; } = null!;
 
         public DbSet<TypeOfAlcohol> Alcohols { get; set; } = null!;
-
-        public DbSet<CocktailImage> CocktailsImages { get; set; } = null!;
     }
 }

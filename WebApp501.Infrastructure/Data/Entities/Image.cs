@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApp501.Infrastructure.Data.Entities
 {
@@ -9,8 +10,12 @@ namespace WebApp501.Infrastructure.Data.Entities
 
         public string? ImageUrl { get; set; }
 
-        public bool IsDeleted { get; set; } = false;
+        [Required]
+        public int CocktailId { get; set; }
 
-        public IEnumerable<CocktailImage> ImageCocktails { get; set; } = new List<CocktailImage>();
+        [ForeignKey(nameof(CocktailId))]
+        public Cocktail Cocktail { get; set; } = null!;
+
+        public bool IsDeleted { get; set; } = false;
     }
 }

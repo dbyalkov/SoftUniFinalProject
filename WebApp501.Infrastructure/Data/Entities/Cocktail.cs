@@ -39,8 +39,8 @@ namespace WebApp501.Infrastructure.Data.Entities
         [ForeignKey(nameof(GlassId))]
         public Glass? Glass { get; set; }
 
-        public bool IsDeleted { get; set; } = false;
+        public Image? Image { get; set; }
 
-        public IEnumerable<CocktailImage> CocktailImages { get; set; } = new List<CocktailImage>();
+        public bool IsDeleted { get; set; } = false;
     }
 }

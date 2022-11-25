@@ -12,10 +12,7 @@ namespace WebApp501.Core.Models.Cocktail
 
         public string Preparation { get; set; } = null!;
 
-        [Display(Name = "Bartender")]
-        public int BartenderId { get; set; }
-
         [Display(Name = "Image")]
-        public int? CocktailImage { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }
