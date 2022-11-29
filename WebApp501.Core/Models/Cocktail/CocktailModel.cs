@@ -8,6 +8,8 @@ namespace WebApp501.Core.Models.Cocktail
 {
     public class CocktailModel
     {
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(MaxNameLength)]
         [MinLength(MinNameLength)]
@@ -34,7 +36,7 @@ namespace WebApp501.Core.Models.Cocktail
         [Display(Name = "Glass")]
         public int? GlassId { get; set; }        
 
-        public Image Image { get; set; }
+        public Image? Image { get; set; }
 
         public IEnumerable<CocktailAlcoholModel> CocktailAlcohols { get; set; } = new List<CocktailAlcoholModel>();
     }

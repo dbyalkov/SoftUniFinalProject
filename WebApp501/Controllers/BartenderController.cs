@@ -8,5 +8,10 @@ namespace WebApp501.Controllers
         {
             return View();
         }
+
+        public IActionResult Become()
+        {
+            return View();
+        }
     }
 }
