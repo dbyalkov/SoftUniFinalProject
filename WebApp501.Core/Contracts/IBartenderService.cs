@@ -4,7 +4,7 @@
     {
         Task<bool> ExistsById(string userId);
 
-        Task<bool> UserWithEmailExists(string userEmail);
+        Task<bool> UserWithUserNameExists(string userName);
 
         Task<bool> UserHasCocktails(string userId);
 

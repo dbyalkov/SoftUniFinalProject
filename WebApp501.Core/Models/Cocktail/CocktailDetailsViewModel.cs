@@ -7,5 +7,7 @@
         public string Recipe { get; set; } = null!;
 
         public string Preparation { get; set; } = null!;
+
+        public string? ImageUrl { get; set; }
     }
 }

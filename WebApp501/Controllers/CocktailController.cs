@@ -181,7 +181,8 @@ namespace WebApp501.Controllers
             {
                 Name = cocktail.Name,
                 Recipe = cocktail.Recipe,
-                Preparation = cocktail.Preparation
+                Preparation = cocktail.Preparation,
+                ImageUrl = cocktail.ImageUrl
             };
 
             return View(model);

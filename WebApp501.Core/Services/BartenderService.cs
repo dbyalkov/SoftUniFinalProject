@@ -47,10 +47,10 @@ namespace WebApp501.Core.Services
                 .AnyAsync(c => c.Bartender.UserId == userId);
         }
 
-        public async Task<bool> UserWithEmailExists(string userEmail)
+        public async Task<bool> UserWithUserNameExists(string userName)
         {
             return await repo.All<Bartender>()
-                .AnyAsync(b => b.User.Email == userEmail);
+                .AnyAsync(b => b.User.UserName == userName);
         }
     }
 }

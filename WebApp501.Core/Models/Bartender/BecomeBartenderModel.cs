@@ -4,7 +4,7 @@ using static WebApp501.Infrastructure.Data.DataConstants.Bartender;
 
 namespace WebApp501.Core.Models.Bartender
 {
-    public class BecomeBartenderModel
+    public class BecomeBartenderModel : BartenderServiceModel
     {
         [Required]
         [MaxLength(MaxFirstNameLength)]

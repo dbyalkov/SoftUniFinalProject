@@ -124,7 +124,7 @@ namespace WebApp501.Core.Services
                     Alcohol = c.Alcohol.Name,
                     Bartender = new Models.Bartender.BartenderServiceModel()
                     {
-                        Email = c.Bartender.User.Email
+                        UserName = c.Bartender.User.UserName
                     },
                     ImageUrl = c.Image.ImageUrl
                 })
