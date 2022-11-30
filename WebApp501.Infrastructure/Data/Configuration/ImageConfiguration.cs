@@ -32,7 +32,7 @@ namespace WebApp501.Infrastructure.Data.Configuration
                 new Image()
                 {
                     Id = 3,
-                    ImageUrl = "https://unsplash.com/photos/TgQkxQc-t_U",
+                    ImageUrl = "https://cdn.diffords.com/contrib/stock-images/2017/1/16/20177572d2119c567079c338b14db4eb375e.jpg",
                     CocktailId = 5
                 },
                 new Image()
