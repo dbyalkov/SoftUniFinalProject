@@ -32,7 +32,7 @@ namespace WebApp501.Infrastructure.Data.Configuration
                 new Image()
                 {
                     Id = 3,
-                    ImageUrl = "https://www.google.com/search?q=rhett+butler+cocktail&hl=en&sxsrf=ALiCzsbUCF-euUThMys6PTAiPP0xK4V37w%3A1668595185273&ei=8b10Y6ydEJqRxc8Pzo2z-As&oq=Rhett+Butler&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgBMgUIABCABDIKCAAQgAQQhwIQFDIFCAAQgAQyBQguEIAEMgUILhCABDIFCAAQgAQyBQgAEIAEMgUIABCABDILCC4QgAQQxwEQrwEyBQgAEIAESgQIQRgASgQIRhgAUABYAGCfF2gAcAF4AIABqQKIAakCkgEDMi0xmAEAoAECoAEBwAEB&sclient=gws-wiz-serp",
+                    ImageUrl = "https://unsplash.com/photos/TgQkxQc-t_U",
                     CocktailId = 5
                 },
                 new Image()
