@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using static WebApp501.Infrastructure.Data.DataConstants.Glass;
+using static WebApp501.Infrastructure.Data.DataConstants.Glasses;
 
 namespace WebApp501.Infrastructure.Data.Entities
 {

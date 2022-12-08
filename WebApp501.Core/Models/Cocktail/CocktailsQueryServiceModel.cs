@@ -1,6 +1,6 @@
 ﻿namespace WebApp501.Core.Models.Cocktail
 {
-    public class CocktailsQueryModel
+    public class CocktailsQueryServiceModel
     {
         public int TotalCocktailsCount { get; set; }
 

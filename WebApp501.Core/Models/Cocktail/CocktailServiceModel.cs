@@ -6,13 +6,17 @@ namespace WebApp501.Core.Models.Cocktail
     {
         public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; } = null!;
 
+        [Required]
         public string Recipe { get; set; } = null!;
 
+        [Required]
         public string Preparation { get; set; } = null!;
 
-        [Display(Name = "Image")]
-        public string? ImageUrl { get; set; }
+        [Required]
+        [Display(Name = "Image URL")]
+        public string ImageUrl { get; set; } = null!;
     }
 }

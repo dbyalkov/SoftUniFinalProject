@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 using Microsoft.AspNetCore.Identity;
 
-using static WebApp501.Infrastructure.Data.DataConstants.Bartender;
+using static WebApp501.Infrastructure.Data.DataConstants.Bartenders;
 
 namespace WebApp501.Infrastructure.Data.Entities
 {

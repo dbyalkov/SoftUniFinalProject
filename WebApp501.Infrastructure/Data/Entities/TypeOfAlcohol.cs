@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using static WebApp501.Infrastructure.Data.DataConstants.Alcohol;
+using static WebApp501.Infrastructure.Data.DataConstants.Alcohols;
 
 namespace WebApp501.Infrastructure.Data.Entities
 {

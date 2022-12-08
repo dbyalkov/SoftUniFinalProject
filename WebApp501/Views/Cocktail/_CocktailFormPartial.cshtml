@@ -1,0 +1,52 @@
+﻿@model CocktailFormModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Name...">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe"></label>
+                <input asp-for="Recipe" class="form-control" placeholder="Recipe...">
+                <span asp-validation-for="Recipe" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Preparation"></label>
+                <textarea asp-for="Preparation" rows="4" class="form-control" placeholder="Preparation..."></textarea>
+                <span asp-validation-for="Preparation" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image"></label>
+                <input asp-for="Image" class="form-control" placeholder="Your fine URL here...">
+                <span asp-validation-for="Image" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlcoholId"></label>
+                <select asp-for="AlcoholId" class="form-control">
+                    @foreach (var alcohol in Model.Alcohols)
+                    {
+                        <option value="@alcohol.Id">@alcohol.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="AlcoholId" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GlassId"></label>
+                <select asp-for="GlassId" class="form-control">
+                    @foreach (var glass in Model.Glasses)
+                    {
+                        <option value="@glass.Id">@glass.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="GlassId" class="small text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

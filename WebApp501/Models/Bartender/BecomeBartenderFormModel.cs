@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using static WebApp501.Infrastructure.Data.DataConstants.Bartender;
+using static WebApp501.Infrastructure.Data.DataConstants.Bartenders;
 
 namespace WebApp501.Models.Bartender
 {

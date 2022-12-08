@@ -6,20 +6,27 @@ namespace WebApp501.Core.Contracts
     {
         Task<IEnumerable<CocktailIndexServiceModel>> LastTenCocktailsAsync();
 
-        Task<IEnumerable<CocktailAlcoholModel>> AllTypesOfAlcohol();
+        Task<IEnumerable<CocktailAlcoholServiceModel>> AllTypesOfAlcoholAsync();
 
-        Task<bool> AlcoholExists(int alcoholId);
+        Task<IEnumerable<CocktailGlassServiceModel>> AllGlassesAsync();
 
-        Task<int> Create(CocktailFormModel model, int bartenderId);
+        Task<bool> AlcoholExistsAsync(int alcoholId);
 
-        Task<CocktailsQueryModel> All(
+        Task<bool> GlassExistsAsync(int glassId);
+
+        Task<int> CreateAsync(CocktailFormModel model, int bartenderId);
+
+        Task<CocktailsQueryServiceModel> AllAsync(
             string? alcohol = null,
+            string? glass = null,
             string? searchTerm = null,
             CocktailSorting sorting = CocktailSorting.Newest,
             int currentPage = 1,
             int cocktailsPerPage = 1);
 
-        Task<IEnumerable<string>> AllAlcoholsNames();
+        Task<IEnumerable<string>> AllAlcoholsNamesAsync();
+
+        Task<IEnumerable<string>> AllGlassesNamesAsync();
 
         Task<IEnumerable<CocktailServiceModel>> AllCocktailsByBartenderId(int id);
 
@@ -29,7 +36,9 @@ namespace WebApp501.Core.Contracts
 
         Task Edit(int cocktailId, CocktailFormModel model);
 
-        Task<int> GetCocktailAlcoholId(int cocktailId);
+        Task<int> GetCocktailAlcoholIdAsync(int cocktailId);
+
+        Task<int> GetCocktailGlassIdAsync(int cocktailId);
 
         Task Delete(int cocktailId);
     }

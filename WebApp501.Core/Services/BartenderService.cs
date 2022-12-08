@@ -30,7 +30,7 @@ namespace WebApp501.Core.Services
         }
 
         public async Task<bool> ExistsByIdAsync(string userId)
-            => await this.repo.All<Bartender>().AnyAsync(b => b.UserId == userId);
+            => await this.repo.AllReadonly<Bartender>().AnyAsync(b => b.UserId == userId);
 
         public async Task<int> GetBartenderIdAsync(string userId)
             => (await this.repo.AllReadonly<Bartender>().FirstOrDefaultAsync(b => b.UserId == userId))?.Id ?? 0;

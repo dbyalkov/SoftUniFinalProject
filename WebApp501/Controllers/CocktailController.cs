@@ -26,15 +26,17 @@ namespace WebApp501.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> All([FromQuery] AllCocktailsQueryModel query)
         {
-            var result = await cocktailService.All(
+            var result = await this.cocktailService.AllAsync(
                 query.Alcohol,
+                query.Glass,
                 query.SearchTerm,
                 query.Sorting,
                 query.CurrentPage,
                 AllCocktailsQueryModel.CocktailsPerPage);
 
             query.TotalCocktailsCount = result.TotalCocktailsCount;
-            query.Alcohols = await cocktailService.AllAlcoholsNames();
+            query.Alcohols = await this.cocktailService.AllAlcoholsNamesAsync();
+            query.Glasses = await this.cocktailService.AllGlassesNamesAsync();
             query.Cocktails = result.Cocktails;
 
             return View(query);
@@ -67,14 +69,15 @@ namespace WebApp501.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            if ((await bartenderService.ExistsByIdAsync(User.Id())) == false)
+            if ((await this.bartenderService.ExistsByIdAsync(User.Id())) == false)
             {
                 return RedirectToAction(nameof(BartenderController.Become), "Bartender");
             }
 
             var model = new CocktailFormModel()
             {
-                CocktailAlcohols = await cocktailService.AllTypesOfAlcohol()
+                Alcohols = await this.cocktailService.AllTypesOfAlcoholAsync(),
+                Glasses = await this.cocktailService.AllGlassesAsync()
             };
 
             return View(model);
@@ -83,28 +86,33 @@ namespace WebApp501.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(CocktailFormModel cocktail)
         {
-            if ((await bartenderService.ExistsByIdAsync(User.Id())) == false)
+            if (!(await this.bartenderService.ExistsByIdAsync(this.User.Id())))
             {
                 return RedirectToAction(nameof(BartenderController.Become), "Bartender");
             }
 
-            if ((await cocktailService.AlcoholExists(cocktail.AlcoholId)) == false)
+            if (!(await this.cocktailService.AlcoholExistsAsync(cocktail.AlcoholId)))
             {
-                ModelState.AddModelError(nameof(cocktail.AlcoholId), "Alcohol does not exist.");
+                this.ModelState.AddModelError(nameof(cocktail.AlcoholId), "Alcohol does not exist.");
+            }
+
+            if (!(await this.cocktailService.GlassExistsAsync(cocktail.GlassId)))
+            {
+                this.ModelState.AddModelError(nameof(cocktail.GlassId), "Glass does not exist.");
             }
 
             if (!ModelState.IsValid)
             {
-                cocktail.CocktailAlcohols = await cocktailService.AllTypesOfAlcohol();
+                cocktail.Alcohols = await this.cocktailService.AllTypesOfAlcoholAsync();
 
                 return View(cocktail);
             }
 
-            int bartenderId = await bartenderService.GetBartenderIdAsync(User.Id());
+            int bartenderId = await this.bartenderService.GetBartenderIdAsync(this.User.Id());
 
-            int id = await cocktailService.Create(cocktail, bartenderId);
+            int newCocktailId = await this.cocktailService.CreateAsync(cocktail, bartenderId);
 
-            return RedirectToAction(nameof(Mine), new { id = id });
+            return RedirectToAction(nameof(Details), new { id = newCocktailId });
         }
 
         [HttpGet]
@@ -115,9 +123,9 @@ namespace WebApp501.Controllers
                 return RedirectToAction(nameof(All));
             }
 
-            var cocktail = await cocktailService.CocktailDetailsById(id);
-            int bartenderId = await bartenderService.GetBartenderIdAsync(User.Id());
-            var alcoholId = await cocktailService.GetCocktailAlcoholId(id);
+            var cocktail = await this.cocktailService.CocktailDetailsById(id);
+            var alcoholId = await this.cocktailService.GetCocktailAlcoholIdAsync(id);
+            var glassId = await this.cocktailService.GetCocktailGlassIdAsync(id);
 
             var model = new CocktailFormModel()
             {
@@ -125,9 +133,10 @@ namespace WebApp501.Controllers
                 Name = cocktail.Name,
                 Recipe = cocktail.Recipe,
                 Preparation = cocktail.Preparation,
-                BartenderId = bartenderId,
                 AlcoholId = alcoholId,
-                CocktailAlcohols = await cocktailService.AllTypesOfAlcohol()
+                GlassId = glassId,
+                Alcohols = await this.cocktailService.AllTypesOfAlcoholAsync(),
+                Glasses = await this.cocktailService.AllGlassesAsync()
             };
 
             return View(model);
@@ -144,22 +153,22 @@ namespace WebApp501.Controllers
             if ((await cocktailService.Exists(model.Id)) == false)
             {
                 ModelState.AddModelError("", "Cocktail does not exist.");
-                model.CocktailAlcohols = await cocktailService.AllTypesOfAlcohol();
+                model.Alcohols = await cocktailService.AllTypesOfAlcoholAsync();
 
                 return View(model);
             }
 
-            if ((await cocktailService.AlcoholExists(model.AlcoholId)) == false)
+            if ((await cocktailService.AlcoholExistsAsync(model.AlcoholId)) == false)
             {
                 ModelState.AddModelError(nameof(model.AlcoholId), "Alcohol does not exist");
-                model.CocktailAlcohols = await cocktailService.AllTypesOfAlcohol();
+                model.Alcohols = await cocktailService.AllTypesOfAlcoholAsync();
 
                 return View(model);
             }
 
             if (ModelState.IsValid == false)
             {
-                model.CocktailAlcohols = await cocktailService.AllTypesOfAlcohol();
+                model.Alcohols = await cocktailService.AllTypesOfAlcoholAsync();
 
                 return View(model);
             }

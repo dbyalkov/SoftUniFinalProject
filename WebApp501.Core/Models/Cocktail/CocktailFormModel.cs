@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using WebApp501.Infrastructure.Data.Entities;
-
-using static WebApp501.Infrastructure.Data.DataConstants.Cocktail;
+using static WebApp501.Infrastructure.Data.DataConstants.Cocktails;
 
 namespace WebApp501.Core.Models.Cocktail
 {
@@ -26,18 +24,17 @@ namespace WebApp501.Core.Models.Cocktail
         public string Preparation { get; set; } = null!;
 
         [Required]
-        [Display(Name = "Bartender")]
-        public int BartenderId { get; set; }
-
-        [Required]
         [Display(Name = "Alcohol")]
         public int AlcoholId { get; set; }
 
         [Display(Name = "Glass")]
-        public int? GlassId { get; set; }        
+        public int GlassId { get; set; }
 
-        public Image? Image { get; set; }
+        [Display(Name = "ImageUrl")]
+        public string Image { get; set; } = null!;
 
-        public IEnumerable<CocktailAlcoholModel> CocktailAlcohols { get; set; } = new List<CocktailAlcoholModel>();
+        public IEnumerable<CocktailAlcoholServiceModel> Alcohols { get; set; } = new List<CocktailAlcoholServiceModel>();
+
+        public IEnumerable<CocktailGlassServiceModel> Glasses { get; set; } = new List<CocktailGlassServiceModel>();
     }
 }

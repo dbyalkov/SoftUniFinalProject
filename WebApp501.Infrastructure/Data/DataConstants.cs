@@ -2,13 +2,13 @@
 {
     public class DataConstants
     {
-        public class Alcohol
+        public class Alcohols
         {
             public const int MaxNameLength = 40;
             public const int MinNameLength = 1;
         }
 
-        public class Bartender
+        public class Bartenders
         {
             public const int MaxFirstNameLength = 30;
             public const int MinFirstNameLength = 1;
@@ -19,7 +19,7 @@
             public const int MinAge = 18;
         }
 
-        public class Cocktail
+        public class Cocktails
         {
             public const int MaxNameLength = 40;
             public const int MinNameLength = 1;
@@ -31,7 +31,7 @@
             public const int MinPreparationLength = 1;
         }
 
-        public class Glass
+        public class Glasses
         {
             public const int MaxNameLength = 30;
             public const int MinNameLength = 1;

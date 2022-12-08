@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using static WebApp501.Infrastructure.Data.DataConstants.Cocktail;
+using static WebApp501.Infrastructure.Data.DataConstants.Cocktails;
 
 namespace WebApp501.Infrastructure.Data.Entities
 {
@@ -34,7 +34,7 @@ namespace WebApp501.Infrastructure.Data.Entities
         [ForeignKey(nameof(BartenderId))]
         public Bartender Bartender { get; set; } = null!;
 
-        public int? GlassId { get; set; }
+        public int GlassId { get; set; }
 
         [ForeignKey(nameof(GlassId))]
         public Glass Glass { get; set; } = null!;
