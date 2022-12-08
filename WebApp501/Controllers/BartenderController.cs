@@ -3,63 +3,56 @@ using Microsoft.AspNetCore.Mvc;
 
 using WebApp501.Core.Constants;
 using WebApp501.Core.Contracts;
-using WebApp501.Core.Models.Bartender;
 using WebApp501.Extensions;
+using WebApp501.Models.Bartender;
 
 namespace WebApp501.Controllers
 {
     [Authorize]
-    public class BartenderController : BaseController
+    public class BartenderController : Controller
     {
         private readonly IBartenderService bartenderService;
 
         public BartenderController(IBartenderService _bartenderService)
         {
-            bartenderService = _bartenderService;
+            this.bartenderService = _bartenderService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Become()
         {
-            if (await bartenderService.ExistsById(User.Id()))
+            if (await this.bartenderService.ExistsByIdAsync(User.Id()))
             {
                 TempData[MessageConstant.ErrorMessage] = "You are already a bartender.";
 
                 return RedirectToAction("Index", "Home");
             }
 
-            var model = new BecomeBartenderModel();
+            var model = new BecomeBartenderFormModel();
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Become(BecomeBartenderModel model)
+        public async Task<IActionResult> Become(BecomeBartenderFormModel bartender)
         {
-            var userId = User.Id();
+            var userId = this.User.Id();
 
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            if (await bartenderService.ExistsById(userId))
+            if (await this.bartenderService.ExistsByIdAsync(userId))
             {
                 TempData[MessageConstant.ErrorMessage] = "You are already a bartender.";
 
                 return RedirectToAction("Index", "Home");
             }
 
-            if (await bartenderService.UserWithUserNameExists(model.UserName))
+            if (!ModelState.IsValid)
             {
-                TempData[MessageConstant.ErrorMessage] = "User with that username already exists.";
-
-                return RedirectToAction("Index", "Home");
+                return View(bartender);
             }
 
-            await bartenderService.Create(userId, model.FirstName, model.LastName, model.Age);
+            await this.bartenderService.CreateAsync(userId, bartender.FirstName, bartender.LastName, bartender.Age);
 
-            return RedirectToAction("All", "House");
+            return RedirectToAction("All", "Cocktail");
         }
     }
 }

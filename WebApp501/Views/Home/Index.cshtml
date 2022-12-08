@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CocktailHomeModel>
+﻿@model IEnumerable<CocktailIndexServiceModel>
 @{
     ViewData["Title"] = "Home Page";
     bool first = true;
@@ -7,7 +7,7 @@
 @if (Model.Count() == 0)
 {
     <div class="mt-4 p-5 bg-light">
-        <h1 class="display-4">Welcome to the best place a little drink!</h1>
+        <h1 class="display-4">Welcome to the best place for a little drink!</h1>
         <p class="lead">
             There are no cocktails in the system currently available
             so why don't you just add one?
@@ -17,7 +17,7 @@
             @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
             {
                 <a asp-controller="Cocktail" asp-action="Add" class="btn btn-primary btn-lg"
-           role="button">Add House</a>
+           role="button">Add Cocktail</a>
             }
         </p>
     </div>
@@ -35,7 +35,7 @@
                  src="@cocktail.ImageUrl" alt="@cocktail.Name">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>
-                        <a class="btn btn-primary" asp-controller="House" asp-action="Details"
+                        <a class="btn btn-primary" asp-controller="Cocktail" asp-action="Details"
                        asp-route-id="@cocktail.Id" > @cocktail.Name</a>
                     </h5>
                 </div>

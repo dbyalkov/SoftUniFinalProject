@@ -131,7 +131,7 @@ namespace WebApp501.Core.Services
                 .FirstAsync();
         }
 
-        public async Task<int> Create(CocktailModel model, int bartenderId)
+        public async Task<int> Create(CocktailFormModel model, int bartenderId)
         {
             var cocktail = new Cocktail()
             {
@@ -158,7 +158,7 @@ namespace WebApp501.Core.Services
             await repo.SaveChangesAsync();
         }
 
-        public async Task Edit(int cocktailId, CocktailModel model)
+        public async Task Edit(int cocktailId, CocktailFormModel model)
         {
             var cocktail = await repo.GetByIdAsync<Cocktail>(cocktailId);
 
@@ -183,12 +183,12 @@ namespace WebApp501.Core.Services
             return (await repo.GetByIdAsync<Cocktail>(cocktailId)).AlcoholId;
         }
 
-        public async Task<IEnumerable<CocktailHomeModel>> LastTenCocktails()
+        public async Task<IEnumerable<CocktailIndexServiceModel>> LastTenCocktailsAsync()
         {
             return await repo.AllReadonly<Cocktail>()
                 .Where(c => c.IsDeleted == false)
                 .OrderByDescending(c => c.Id)
-                .Select(c => new CocktailHomeModel()
+                .Select(c => new CocktailIndexServiceModel()
                 {
                     Id = c.Id,
                     Name = c.Name,

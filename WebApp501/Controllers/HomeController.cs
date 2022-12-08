@@ -7,19 +7,17 @@ using WebApp501.Models;
 
 namespace WebApp501.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         private readonly ICocktailService cocktailService;
 
         public HomeController(ICocktailService _cocktailService)
         {
-            cocktailService = _cocktailService;
+            this.cocktailService = _cocktailService;
         }
 
         public async Task<IActionResult> Index()
-        {
-            return View(await cocktailService.LastTenCocktails());
-        }
+            => View(await this.cocktailService.LastTenCocktailsAsync());
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

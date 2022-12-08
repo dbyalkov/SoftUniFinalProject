@@ -12,10 +12,10 @@ namespace WebApp501.Core.Services
 
         public BartenderService(IRepository _repo)
         {
-            repo = _repo;
+            this.repo = _repo;
         }
 
-        public async Task Create(string userId, string firstName, string lastName, int age)
+        public async Task CreateAsync(string userId, string firstName, string lastName, int age)
         {
             var bartender = new Bartender()
             {
@@ -25,32 +25,17 @@ namespace WebApp501.Core.Services
                 Age = age
             };
 
-            await repo.AddAsync(bartender);
-            await repo.SaveChangesAsync();
+            await this.repo.AddAsync(bartender);
+            await this.repo.SaveChangesAsync();
         }
 
-        public async Task<bool> ExistsById(string userId)
-        {
-            return await repo.All<Bartender>()
-                .AnyAsync(b => b.UserId == userId);
-        }
+        public async Task<bool> ExistsByIdAsync(string userId)
+            => await this.repo.All<Bartender>().AnyAsync(b => b.UserId == userId);
 
-        public async Task<int> GetBartenderId(string userId)
-        {
-            return (await repo.AllReadonly<Bartender>()
-                .FirstOrDefaultAsync(b => b.UserId == userId))?.Id ?? 0;
-        }
+        public async Task<int> GetBartenderIdAsync(string userId)
+            => (await this.repo.AllReadonly<Bartender>().FirstOrDefaultAsync(b => b.UserId == userId))?.Id ?? 0;
 
-        public async Task<bool> UserHasCocktails(string userId)
-        {
-            return await repo.All<Cocktail>()
-                .AnyAsync(c => c.Bartender.UserId == userId);
-        }
-
-        public async Task<bool> UserWithUserNameExists(string userName)
-        {
-            return await repo.All<Bartender>()
-                .AnyAsync(b => b.User.UserName == userName);
-        }
+        public async Task<int> UsersCocktailsAsync(string userId)
+            => await this.repo.AllReadonly<Cocktail>().CountAsync(c => c.Bartender.UserId == userId);
     }
 }

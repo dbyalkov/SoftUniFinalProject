@@ -4,11 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using WebApp501.Core.Contracts;
 using WebApp501.Core.Models.Cocktail;
 using WebApp501.Extensions;
-using WebApp501.Models;
+using WebApp501.Models.Cocktail;
 
 namespace WebApp501.Controllers
 {
-    public class CocktailController : BaseController
+    [Authorize]
+    public class CocktailController : Controller
     {
         private readonly ICocktailService cocktailService;
         private readonly IBartenderService bartenderService;
@@ -17,8 +18,8 @@ namespace WebApp501.Controllers
             ICocktailService _cocktailService,
             IBartenderService _bartenderService)
         {
-            cocktailService = _cocktailService;
-            bartenderService = _bartenderService;
+            this.cocktailService = _cocktailService;
+            this.bartenderService = _bartenderService;
         }
 
         [HttpGet]
@@ -44,7 +45,7 @@ namespace WebApp501.Controllers
             IEnumerable<CocktailServiceModel> myCocktails;
             var userId = User.Id();
 
-            int bartenderId = await bartenderService.GetBartenderId(userId);
+            int bartenderId = await bartenderService.GetBartenderIdAsync(userId);
             myCocktails = await cocktailService.AllCocktailsByBartenderId(bartenderId);
 
             return View(myCocktails);
@@ -66,12 +67,12 @@ namespace WebApp501.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            if ((await bartenderService.ExistsById(User.Id())) == false)
+            if ((await bartenderService.ExistsByIdAsync(User.Id())) == false)
             {
                 return RedirectToAction(nameof(BartenderController.Become), "Bartender");
             }
 
-            var model = new CocktailModel()
+            var model = new CocktailFormModel()
             {
                 CocktailAlcohols = await cocktailService.AllTypesOfAlcohol()
             };
@@ -80,28 +81,28 @@ namespace WebApp501.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(CocktailModel model)
+        public async Task<IActionResult> Add(CocktailFormModel cocktail)
         {
-            if ((await bartenderService.ExistsById(User.Id())) == false)
+            if ((await bartenderService.ExistsByIdAsync(User.Id())) == false)
             {
                 return RedirectToAction(nameof(BartenderController.Become), "Bartender");
             }
 
-            if ((await cocktailService.AlcoholExists(model.AlcoholId)) == false)
+            if ((await cocktailService.AlcoholExists(cocktail.AlcoholId)) == false)
             {
-                ModelState.AddModelError(nameof(model.AlcoholId), "Alcohol does not exist.");
+                ModelState.AddModelError(nameof(cocktail.AlcoholId), "Alcohol does not exist.");
             }
 
             if (!ModelState.IsValid)
             {
-                model.CocktailAlcohols = await cocktailService.AllTypesOfAlcohol();
+                cocktail.CocktailAlcohols = await cocktailService.AllTypesOfAlcohol();
 
-                return View(model);
+                return View(cocktail);
             }
 
-            int bartenderId = await bartenderService.GetBartenderId(User.Id());
+            int bartenderId = await bartenderService.GetBartenderIdAsync(User.Id());
 
-            int id = await cocktailService.Create(model, bartenderId);
+            int id = await cocktailService.Create(cocktail, bartenderId);
 
             return RedirectToAction(nameof(Mine), new { id = id });
         }
@@ -115,10 +116,10 @@ namespace WebApp501.Controllers
             }
 
             var cocktail = await cocktailService.CocktailDetailsById(id);
-            int bartenderId = await bartenderService.GetBartenderId(User.Id());
+            int bartenderId = await bartenderService.GetBartenderIdAsync(User.Id());
             var alcoholId = await cocktailService.GetCocktailAlcoholId(id);
 
-            var model = new CocktailModel()
+            var model = new CocktailFormModel()
             {
                 Id = id,
                 Name = cocktail.Name,
@@ -133,7 +134,7 @@ namespace WebApp501.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, CocktailModel model)
+        public async Task<IActionResult> Edit(int id, CocktailFormModel model)
         {
             if (id != model.Id)
             {

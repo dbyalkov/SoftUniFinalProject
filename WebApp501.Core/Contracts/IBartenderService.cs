@@ -2,14 +2,12 @@
 {
     public interface IBartenderService
     {
-        Task<bool> ExistsById(string userId);
+        Task<bool> ExistsByIdAsync(string userId);
 
-        Task<bool> UserWithUserNameExists(string userName);
+        Task<int> UsersCocktailsAsync(string userId);
 
-        Task<bool> UserHasCocktails(string userId);
+        Task CreateAsync(string userId, string firstName, string lastName, int age);
 
-        Task Create(string userId, string firstName, string lastName, int age);
-
-        Task<int> GetBartenderId(string userId);
+        Task<int> GetBartenderIdAsync(string userId);
     }
 }

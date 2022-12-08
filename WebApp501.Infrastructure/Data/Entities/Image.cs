@@ -8,7 +8,7 @@ namespace WebApp501.Infrastructure.Data.Entities
         [Key]
         public int Id { get; set; }
 
-        public string? ImageUrl { get; set; }
+        public string ImageUrl { get; set; } = null!;
 
         [Required]
         public int CocktailId { get; set; }

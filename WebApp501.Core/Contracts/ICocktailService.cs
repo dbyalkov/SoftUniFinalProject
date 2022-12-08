@@ -4,13 +4,13 @@ namespace WebApp501.Core.Contracts
 {
     public interface ICocktailService
     {
-        Task<IEnumerable<CocktailHomeModel>> LastTenCocktails();
+        Task<IEnumerable<CocktailIndexServiceModel>> LastTenCocktailsAsync();
 
         Task<IEnumerable<CocktailAlcoholModel>> AllTypesOfAlcohol();
 
         Task<bool> AlcoholExists(int alcoholId);
 
-        Task<int> Create(CocktailModel model, int bartenderId);
+        Task<int> Create(CocktailFormModel model, int bartenderId);
 
         Task<CocktailsQueryModel> All(
             string? alcohol = null,
@@ -27,7 +27,7 @@ namespace WebApp501.Core.Contracts
 
         Task<bool> Exists(int id);
 
-        Task Edit(int cocktailId, CocktailModel model);
+        Task Edit(int cocktailId, CocktailFormModel model);
 
         Task<int> GetCocktailAlcoholId(int cocktailId);
 
