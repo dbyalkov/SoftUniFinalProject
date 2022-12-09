@@ -1,9 +1,6 @@
-﻿using System.Diagnostics;
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 using WebApp501.Core.Contracts;
-using WebApp501.Models;
 
 namespace WebApp501.Controllers
 {
@@ -20,9 +17,19 @@ namespace WebApp501.Controllers
             => View(await this.cocktailService.LastTenCocktailsAsync());
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(int statusCode)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (statusCode == 400)
+            {
+                return View("Error400");
+            }
+
+            if (statusCode == 401)
+            {
+                return View("Error401");
+            }
+
+            return View();
         }
     }
 }
