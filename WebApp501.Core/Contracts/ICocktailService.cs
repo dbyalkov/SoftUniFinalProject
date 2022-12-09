@@ -28,7 +28,7 @@ namespace WebApp501.Core.Contracts
 
         Task<IEnumerable<string>> AllGlassesNamesAsync();
 
-        Task<IEnumerable<CocktailServiceModel>> AllCocktailsByBartenderId(int id);
+        Task<IEnumerable<CocktailServiceModel>> AllCocktailsByBartenderIdAsync(int id);
 
         Task<CocktailServiceModel> CocktailDetailsById(int id);
 

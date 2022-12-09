@@ -44,11 +44,14 @@ namespace WebApp501.Controllers
 
         public async Task<IActionResult> Mine()
         {
-            IEnumerable<CocktailServiceModel> myCocktails;
-            var userId = User.Id();
+            IEnumerable<CocktailServiceModel>? myCocktails = null;
+            var userId = this.User.Id();
 
-            int bartenderId = await bartenderService.GetBartenderIdAsync(userId);
-            myCocktails = await cocktailService.AllCocktailsByBartenderId(bartenderId);
+            if (await this.bartenderService.ExistsByIdAsync(userId))
+            {
+                int bartenderId = await this.bartenderService.GetBartenderIdAsync(userId);
+                myCocktails = await this.cocktailService.AllCocktailsByBartenderIdAsync(bartenderId);
+            }
 
             return View(myCocktails);
         }

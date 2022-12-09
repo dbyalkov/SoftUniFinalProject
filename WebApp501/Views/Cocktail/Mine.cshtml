@@ -1,4 +1,4 @@
-﻿@model AllCocktailsQueryModel
+﻿@model IEnumerable<CocktailServiceModel>
 
 @{
 	ViewBag.Title = "My Cocktails";
@@ -6,3 +6,15 @@
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
+
+@if (!Model.Any())
+{
+	<h2 class="text-center">You have no cocktails yet!</h2>
+}
+
+<div class="row">
+	@foreach (var cocktail in Model)
+	{
+		<partial name="_CocktailPartial" model="@cocktail" />
+	}
+</div>

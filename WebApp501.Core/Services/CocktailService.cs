@@ -84,8 +84,8 @@ namespace WebApp501.Core.Services
                 .Distinct()
                 .ToListAsync();
 
-        public async Task<IEnumerable<CocktailServiceModel>> AllCocktailsByBartenderId(int id)
-            => await repo.AllReadonly<Cocktail>()
+        public async Task<IEnumerable<CocktailServiceModel>> AllCocktailsByBartenderIdAsync(int id)
+            => await this.repo.AllReadonly<Cocktail>()
                 .Where(c => c.IsDeleted == false)
                 .Where(c => c.BartenderId == id)
                 .Select(c => new CocktailServiceModel()
