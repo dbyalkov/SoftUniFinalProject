@@ -2,12 +2,10 @@
 {
     public class CocktailDetailsViewModel
     {
-        public string Name { get; set; } = null!;
+        public int Id { get; init; }
 
-        public string Recipe { get; set; } = null!;
+        public string Name { get; init; } = null!;
 
-        public string Preparation { get; set; } = null!;
-
-        public string? ImageUrl { get; set; }
+        public string ImageUrl { get; init; } = null!;
     }
 }

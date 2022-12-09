@@ -42,6 +42,6 @@ namespace WebApp501.Core.Contracts
 
         Task<bool> HasBartenderWithIdAsync(int cocktailId, string currUserId);
 
-        Task Delete(int cocktailId);
+        Task DeleteAsync(int cocktailId);
     }
 }
