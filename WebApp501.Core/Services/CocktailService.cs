@@ -170,18 +170,17 @@ namespace WebApp501.Core.Services
             await repo.SaveChangesAsync();
         }
 
-        public async Task Edit(int cocktailId, CocktailFormModel model)
+        public async Task EditAsync(int cocktailId, CocktailFormModel model)
         {
-            var cocktail = await repo.GetByIdAsync<Cocktail>(cocktailId);
+            var cocktail = await this.repo.GetByIdAsync<Cocktail>(cocktailId);
 
             cocktail.Name = model.Name;
             cocktail.Recipe = model.Recipe;
             cocktail.Preparation = model.Preparation;
             cocktail.AlcoholId = model.AlcoholId;
             cocktail.GlassId = model.GlassId;
-            cocktail.Image.ImageUrl = model.Image;
 
-            await repo.SaveChangesAsync();
+            await this.repo.SaveChangesAsync();
         }
 
         public async Task<bool> ExistsAsync(int id)
@@ -216,5 +215,19 @@ namespace WebApp501.Core.Services
                 .Select(g => g.Name)
                 .Distinct()
                 .ToListAsync();
+
+        public async Task<bool> HasBartenderWithIdAsync(int cocktailId, string currUserId)
+        {
+            var cocktail = await this.repo.GetByIdAsync<Cocktail>(cocktailId);
+            var bartender = await this.repo.AllReadonly<Bartender>()
+                .FirstOrDefaultAsync(b => b.Id == cocktail.BartenderId);
+
+            if (bartender == null || bartender.UserId != currUserId)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

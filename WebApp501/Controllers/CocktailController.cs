@@ -121,14 +121,19 @@ namespace WebApp501.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            if ((await cocktailService.ExistsAsync(id)) == false)
+            if (!(await this.cocktailService.ExistsAsync(id)))
             {
                 return RedirectToAction(nameof(All));
             }
 
+            if (!(await this.cocktailService.HasBartenderWithIdAsync(id, this.User.Id())))
+            {
+                return Unauthorized();
+            }
+
             var cocktail = await this.cocktailService.CocktailDetailsByIdAsync(id);
-            var alcoholId = await this.cocktailService.GetCocktailAlcoholIdAsync(id);
-            var glassId = await this.cocktailService.GetCocktailGlassIdAsync(id);
+            var cocktailAlcoholId = await this.cocktailService.GetCocktailAlcoholIdAsync(cocktail.Id);
+            var cocktailGlassId = await this.cocktailService.GetCocktailGlassIdAsync(cocktail.Id);
 
             var model = new CocktailFormModel()
             {
@@ -136,8 +141,9 @@ namespace WebApp501.Controllers
                 Name = cocktail.Name,
                 Recipe = cocktail.Recipe,
                 Preparation = cocktail.Preparation,
-                AlcoholId = alcoholId,
-                GlassId = glassId,
+                AlcoholId = cocktailAlcoholId,
+                GlassId = cocktailGlassId,
+                Image = cocktail.ImageUrl,
                 Alcohols = await this.cocktailService.AllTypesOfAlcoholAsync(),
                 Glasses = await this.cocktailService.AllGlassesAsync()
             };
@@ -148,37 +154,48 @@ namespace WebApp501.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, CocktailFormModel model)
         {
-            if (id != model.Id)
+            if (!(await this.cocktailService.ExistsAsync(id)))
             {
-                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+                model.Alcohols = await this.cocktailService.AllTypesOfAlcoholAsync();
+                model.Glasses = await this.cocktailService.AllGlassesAsync();
+
+                return View();
             }
 
-            if ((await cocktailService.ExistsAsync(model.Id)) == false)
+            if (!(await this.cocktailService.HasBartenderWithIdAsync(id, this.User.Id())))
             {
-                ModelState.AddModelError("", "Cocktail does not exist.");
-                model.Alcohols = await cocktailService.AllTypesOfAlcoholAsync();
-
-                return View(model);
+                return Unauthorized();
             }
 
-            if ((await cocktailService.AlcoholExistsAsync(model.AlcoholId)) == false)
+            if (!(await this.cocktailService.AlcoholExistsAsync(model.AlcoholId)))
             {
                 ModelState.AddModelError(nameof(model.AlcoholId), "Alcohol does not exist");
-                model.Alcohols = await cocktailService.AllTypesOfAlcoholAsync();
+                model.Alcohols = await this.cocktailService.AllTypesOfAlcoholAsync();
+                model.Glasses = await this.cocktailService.AllGlassesAsync();
 
                 return View(model);
             }
 
-            if (ModelState.IsValid == false)
+            if (!(await this.cocktailService.GlassExistsAsync(model.GlassId)))
             {
-                model.Alcohols = await cocktailService.AllTypesOfAlcoholAsync();
+                ModelState.AddModelError(nameof(model.GlassId), "Glass does not exist.");
+                model.Alcohols = await this.cocktailService.AllTypesOfAlcoholAsync();
+                model.Glasses = await this.cocktailService.AllGlassesAsync();
 
                 return View(model);
             }
 
-            await cocktailService.Edit(model.Id, model);
+            if (!ModelState.IsValid)
+            {
+                model.Alcohols = await this.cocktailService.AllTypesOfAlcoholAsync();
+                model.Glasses = await this.cocktailService.AllGlassesAsync();
 
-            return RedirectToAction(nameof(Details), new { id = model.Id });
+                return View(model);
+            }
+
+            await this.cocktailService.EditAsync(id, model);
+
+            return RedirectToAction(nameof(Details), new { id = id });
         }
 
         [HttpGet]

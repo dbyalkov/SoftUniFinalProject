@@ -34,11 +34,13 @@ namespace WebApp501.Core.Contracts
 
         Task<bool> ExistsAsync(int id);
 
-        Task Edit(int cocktailId, CocktailFormModel model);
+        Task EditAsync(int cocktailId, CocktailFormModel model);
 
         Task<int> GetCocktailAlcoholIdAsync(int cocktailId);
 
         Task<int> GetCocktailGlassIdAsync(int cocktailId);
+
+        Task<bool> HasBartenderWithIdAsync(int cocktailId, string currUserId);
 
         Task Delete(int cocktailId);
     }
