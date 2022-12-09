@@ -59,12 +59,12 @@ namespace WebApp501.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id, string information)
         {
-            if ((await cocktailService.Exists(id)) == false)
+            if (!(await this.cocktailService.ExistsAsync(id)))
             {
                 return RedirectToAction(nameof(All));
             }
 
-            var model = await cocktailService.CocktailDetailsById(id);
+            var model = await this.cocktailService.CocktailDetailsByIdAsync(id);
 
             return View(model);
         }
@@ -121,12 +121,12 @@ namespace WebApp501.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            if ((await cocktailService.Exists(id)) == false)
+            if ((await cocktailService.ExistsAsync(id)) == false)
             {
                 return RedirectToAction(nameof(All));
             }
 
-            var cocktail = await this.cocktailService.CocktailDetailsById(id);
+            var cocktail = await this.cocktailService.CocktailDetailsByIdAsync(id);
             var alcoholId = await this.cocktailService.GetCocktailAlcoholIdAsync(id);
             var glassId = await this.cocktailService.GetCocktailGlassIdAsync(id);
 
@@ -153,7 +153,7 @@ namespace WebApp501.Controllers
                 return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
 
-            if ((await cocktailService.Exists(model.Id)) == false)
+            if ((await cocktailService.ExistsAsync(model.Id)) == false)
             {
                 ModelState.AddModelError("", "Cocktail does not exist.");
                 model.Alcohols = await cocktailService.AllTypesOfAlcoholAsync();
@@ -184,12 +184,12 @@ namespace WebApp501.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            if ((await cocktailService.Exists(id)) == false)
+            if ((await cocktailService.ExistsAsync(id)) == false)
             {
                 return RedirectToAction(nameof(All));
             }
 
-            var cocktail = await cocktailService.CocktailDetailsById(id);
+            var cocktail = await cocktailService.CocktailDetailsByIdAsync(id);
             var model = new CocktailDetailsViewModel()
             {
                 Name = cocktail.Name,
@@ -205,7 +205,7 @@ namespace WebApp501.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id, CocktailDetailsViewModel model)
         {
-            if ((await cocktailService.Exists(id)) == false)
+            if ((await cocktailService.ExistsAsync(id)) == false)
             {
                 return RedirectToAction(nameof(All));
             }

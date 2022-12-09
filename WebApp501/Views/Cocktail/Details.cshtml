@@ -1,4 +1,4 @@
-﻿@model CocktailDetailsViewModel
+﻿@model CocktailDetailsServiceModel
 
 @{
 	ViewBag.Title = "Cocktail Details";
@@ -6,3 +6,33 @@
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;" src="@Model.ImageUrl" alt="Cocktail Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Name</u></p>
+            <p>Recipe: <b>@Model.Recipe</b></p>
+            <p>Preparation: <b>@Model.Preparation</b></p>
+            <p>Type of Alcohol: <b>@Model.Alcohol</b></p>
+            <p>Type of Glass: <b>@Model.Glass</b></p>
+            <div class="form-inline">
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    <a class="btn btn-warning" asp-controller="Cocktail" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                    <a class="ml-2 btn btn-danger" asp-controller="Cocktail" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                }
+            </div>
+            <p></p>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Bartender</h5>
+                    <p class="card-text">UserName: @Model.Bartender.UserName</p>
+                    <p class="card-text">Email: @Model.Bartender.Email</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

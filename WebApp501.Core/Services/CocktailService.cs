@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using WebApp501.Core.Contracts;
+using WebApp501.Core.Models.Bartender;
 using WebApp501.Core.Models.Cocktail;
 using WebApp501.Infrastructure.Data.Common;
 using WebApp501.Infrastructure.Data.Entities;
@@ -118,22 +119,24 @@ namespace WebApp501.Core.Services
                 })
                 .ToListAsync();
 
-        public async Task<CocktailServiceModel> CocktailDetailsById(int id)
-            => await repo.AllReadonly<Cocktail>()
+        public async Task<CocktailDetailsServiceModel> CocktailDetailsByIdAsync(int id)
+            => await this.repo.AllReadonly<Cocktail>()
                 .Where(c => c.IsDeleted == false)
                 .Where(c => c.Id == id)
-                .Select(c => new CocktailDetailsModel()
+                .Select(c => new CocktailDetailsServiceModel()
                 {
                     Id = id,
                     Name = c.Name,
                     Recipe = c.Recipe,
                     Preparation = c.Preparation,
+                    ImageUrl = c.Image.ImageUrl,
                     Alcohol = c.Alcohol.Name,
-                    Bartender = new Models.Bartender.BartenderServiceModel()
+                    Glass = c.Glass.Name,
+                    Bartender = new BartenderServiceModel()
                     {
-                        UserName = c.Bartender.User.UserName
+                        UserName = c.Bartender.User.UserName,
+                        Email = c.Bartender.User.Email
                     },
-                    ImageUrl = c.Image.ImageUrl
                 })
                 .FirstAsync();
 
@@ -181,11 +184,8 @@ namespace WebApp501.Core.Services
             await repo.SaveChangesAsync();
         }
 
-        public async Task<bool> Exists(int id)
-        {
-            return await repo.AllReadonly<Cocktail>()
-                .AnyAsync(c => c.Id == id && c.IsDeleted == false);
-        }
+        public async Task<bool> ExistsAsync(int id)
+            => await this.repo.AllReadonly<Cocktail>().AnyAsync(c => c.Id == id && c.IsDeleted == false);
 
         public async Task<int> GetCocktailAlcoholIdAsync(int cocktailId)
             => (await repo.GetByIdAsync<Cocktail>(cocktailId)).AlcoholId;

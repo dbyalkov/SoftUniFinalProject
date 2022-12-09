@@ -30,9 +30,9 @@ namespace WebApp501.Core.Contracts
 
         Task<IEnumerable<CocktailServiceModel>> AllCocktailsByBartenderIdAsync(int id);
 
-        Task<CocktailServiceModel> CocktailDetailsById(int id);
+        Task<CocktailDetailsServiceModel> CocktailDetailsByIdAsync(int id);
 
-        Task<bool> Exists(int id);
+        Task<bool> ExistsAsync(int id);
 
         Task Edit(int cocktailId, CocktailFormModel model);
 
