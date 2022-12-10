@@ -30,6 +30,10 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Bartender</h5>
+                    @if (Model.Bartender.FullName != null)
+                    {
+                        <p class="card-text">Full Name: @Model.Bartender.FullName</p>
+                    }
                     <p class="card-text">UserName: @Model.Bartender.UserName</p>
                     <p class="card-text">Email: @Model.Bartender.Email</p>
                 </div>

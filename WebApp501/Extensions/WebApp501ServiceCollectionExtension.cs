@@ -11,6 +11,7 @@ namespace WebApp501.Extensions
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<ICocktailService, CocktailService>();
             services.AddScoped<IBartenderService, BartenderService>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

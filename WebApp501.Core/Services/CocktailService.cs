@@ -11,10 +11,14 @@ namespace WebApp501.Core.Services
     public class CocktailService : ICocktailService
     {
         private readonly IRepository repo;
+        private readonly IBartenderService bartenders;
 
-        public CocktailService(IRepository _repo)
+        public CocktailService(
+            IRepository _repo,
+            IBartenderService _bartenders)
         {
             this.repo = _repo;
+            this.bartenders = _bartenders;
         }
 
         public async Task<bool> AlcoholExistsAsync(int alcoholId)
@@ -135,7 +139,8 @@ namespace WebApp501.Core.Services
                     Bartender = new BartenderServiceModel()
                     {
                         UserName = c.Bartender.User.UserName,
-                        Email = c.Bartender.User.Email
+                        Email = c.Bartender.User.Email,
+                        FullName = $"{c.Bartender.FirstName} {c.Bartender.User.MiddleName.Trim()} {c.Bartender.LastName}"
                     },
                 })
                 .FirstAsync();
