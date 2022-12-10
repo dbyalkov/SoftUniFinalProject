@@ -55,20 +55,12 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
-      name: "default",
-      pattern: "{controller=Home}/{action=Index}/{id?}"
+      name: "Cocktail Details",
+      pattern: "Cocktail/Details/{id}/{information}",
+      defaults: new { Controller = "Cocktail", Action = "Details" }
     );
 
-    endpoints.MapControllerRoute(
-      name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    );
-
-    endpoints.MapControllerRoute(
-      name: "cocktailDetails",
-      pattern: "House/Details/{id}/{information}"
-    );
-
+    endpoints.MapDefaultControllerRoute();
     endpoints.MapRazorPages();
 });
 

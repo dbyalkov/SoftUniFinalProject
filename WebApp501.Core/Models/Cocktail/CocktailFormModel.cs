@@ -4,7 +4,7 @@ using static WebApp501.Infrastructure.Data.DataConstants.Cocktails;
 
 namespace WebApp501.Core.Models.Cocktail
 {
-    public class CocktailFormModel
+    public class CocktailFormModel : ICocktailModel
     {
         public int Id { get; set; }
 

@@ -204,7 +204,9 @@ namespace WebApp501.Core.Services
                 {
                     Id = c.Id,
                     Name = c.Name,
-                    ImageUrl = c.Image.ImageUrl
+                    ImageUrl = c.Image.ImageUrl,
+                    Recipe = c.Recipe,
+                    Preparation = c.Preparation
                 })
                 .Take(10)
                 .ToListAsync();

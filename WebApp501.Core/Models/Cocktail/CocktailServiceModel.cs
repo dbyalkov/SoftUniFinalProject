@@ -2,7 +2,7 @@
 
 namespace WebApp501.Core.Models.Cocktail
 {
-    public class CocktailServiceModel
+    public class CocktailServiceModel : ICocktailModel
     {
         public int Id { get; set; }
 

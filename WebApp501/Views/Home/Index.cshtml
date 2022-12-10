@@ -35,8 +35,8 @@
                  src="@cocktail.ImageUrl" alt="@cocktail.Name">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>
-                        <a class="btn btn-primary" asp-controller="Cocktail" asp-action="Details"
-                       asp-route-id="@cocktail.Id" > @cocktail.Name</a>
+                        <a class="btn btn-primary" asp-controller="Cocktail" asp-action="Details" asp-route-id="@cocktail.Id"
+                        asp-route-information="@cocktail.GetInformation()"> @cocktail.Name</a>
                     </h5>
                 </div>
             </div>
