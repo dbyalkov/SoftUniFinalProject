@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Microsoft.AspNetCore.Identity;
-
 using static WebApp501.Infrastructure.Data.DataConstants.Bartenders;
 
 namespace WebApp501.Infrastructure.Data.Entities
@@ -27,7 +25,7 @@ namespace WebApp501.Infrastructure.Data.Entities
         public string UserId { get; set; } = null!;
 
         [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; set; } = null!;
+        public User User { get; set; } = null!;
 
         public bool IsDeleted { get; set; } = false;
 

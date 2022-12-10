@@ -6,7 +6,7 @@ using WebApp501.Infrastructure.Data.Entities;
 
 namespace WebApp501.Infrastructure.Data
 {
-    public class WebAppDbContext : IdentityDbContext
+    public class WebAppDbContext : IdentityDbContext<User>
     {
         public WebAppDbContext(DbContextOptions<WebAppDbContext> options)
             : base(options)

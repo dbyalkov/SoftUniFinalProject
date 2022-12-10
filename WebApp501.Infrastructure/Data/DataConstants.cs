@@ -36,5 +36,11 @@
             public const int MaxNameLength = 30;
             public const int MinNameLength = 1;
         }
+
+        public class Users
+        {
+            public const int MaxMiddleNameLength = 30;
+            public const int MinMiddleNameLength = 1;
+        }
     }
 }
