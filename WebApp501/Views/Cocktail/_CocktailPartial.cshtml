@@ -1,4 +1,5 @@
 ﻿@model CocktailServiceModel
+@inject ICocktailService cocktails
 
 <div class="col-md-4">
     <div class="card mb-3">
@@ -10,11 +11,10 @@
             <br />
             <a asp-controller="Cocktail" asp-action="Details" asp-route-id="@Model.Id"
             asp-route-information="@Model.GetInformation()" class="btn btn-success">Details</a>
-            @if (this.User.Identity.IsAuthenticated)
+            @if (this.User.Identity.IsAuthenticated && await this.cocktails.HasBartenderWithIdAsync(Model.Id, this.User.Id()))
             {
                 <a asp-controller="Cocktail" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
                 <a asp-controller="Cocktail" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
-                <p></p>
             }
         </div>
     </div>

@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<CocktailIndexServiceModel>
+@inject IBartenderService bartenders
+
 @{
     ViewData["Title"] = "Home Page";
     bool first = true;
@@ -14,10 +16,9 @@
         </p>
         <hr class="my-4">
         <p class="lead">
-            @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+            @if (this.User.Identity.IsAuthenticated && await this.bartenders.ExistsByIdAsync(this.User.Id()))
             {
-                <a asp-controller="Cocktail" asp-action="Add" class="btn btn-primary btn-lg"
-           role="button">Add Cocktail</a>
+                <a asp-controller="Cocktail" asp-action="Add" class="btn btn-primary btn-lg" role="button">Add Cocktail</a>
             }
         </p>
     </div>
