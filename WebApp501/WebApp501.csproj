@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WebApp501.Core\WebApp501.Core.csproj" />
     <ProjectReference Include="..\WebApp501.Infrastructure\WebApp501.Infrastructure.csproj" />
+    <ProjectReference Include="..\WebApp501.WebApi\WebApp501.WebApi.csproj" />
   </ItemGroup>
 
 </Project>

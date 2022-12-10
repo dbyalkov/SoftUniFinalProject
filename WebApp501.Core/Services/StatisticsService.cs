@@ -13,16 +13,18 @@ namespace WebApp501.Core.Services
 
         public StatisticsService(IRepository _repo)
         {
-            repo = _repo;
+            this.repo = _repo;
         }
 
         public async Task<StatisticsServiceModel> Total()
         {
-            int totalCocktails = await repo.AllReadonly<Cocktail>()
-                .CountAsync(c => c.IsDeleted == false);
+            int totalCocktails = await this.repo.AllReadonly<Cocktail>()
+                .Where(c => c.IsDeleted == false)
+                .CountAsync();
 
-            int totalBartenders = await repo.AllReadonly<Bartender>()
-                .CountAsync(b => b.IsDeleted == false);
+            int totalBartenders = await this.repo.AllReadonly<Bartender>()
+                .Where(b => b.IsDeleted == false)
+                .CountAsync();
 
             return new StatisticsServiceModel()
             {
