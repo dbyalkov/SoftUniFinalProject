@@ -8,8 +8,7 @@ namespace WebApp501.Infrastructure.Data.Entities
 {
     public class User : IdentityUser
     {
-        [Required]
         [MaxLength(MaxMiddleNameLength)]
-        public string MiddleName { get; init; } = null!;
+        public string? MiddleName { get; init; } = null;
     }
 }
