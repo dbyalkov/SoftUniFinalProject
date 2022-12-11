@@ -23,11 +23,13 @@ builder.Services.AddDefaultIdentity<User>(options =>
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<WebAppDbContext>();
+
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
         options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
     });
+
 builder.Services.AddApplicationServices();
 builder.Services.AddResponseCaching();
 
@@ -64,6 +66,8 @@ app.UseEndpoints(endpoints =>
     endpoints.MapDefaultControllerRoute();
     endpoints.MapRazorPages();
 });
+
+app.SeedAdmin();
 
 app.UseResponseCaching();
 
