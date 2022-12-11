@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp501.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using WebApp501.Infrastructure.Data;
 namespace WebApp501.Infrastructure.Migrations
 {
     [DbContext(typeof(WebAppDbContext))]
-    partial class WebAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221211191548_AddedAdmin")]
+    partial class AddedAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -874,52 +876,52 @@ namespace WebApp501.Infrastructure.Migrations
                         {
                             Id = "726719c4-8995-4426-9c00-1cb0831621d4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "de08a02d-8f5d-4003-bdaf-4fe2194a6ead",
+                            ConcurrencyStamp = "ac2a887e-8f53-48a4-95d5-805ea430eb49",
                             Email = "dbyalkov@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             MiddleName = "Nikolaev",
                             NormalizedEmail = "DBYALKOV@ABV.BG",
-                            NormalizedUserName = "DBYALKOV@ABV.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPxMAnQTUZ5aRhjlv8YN80P20l03AS4CXHGIhAF3dCaB3VowIzAsdH11PlwnpguNPg==",
+                            NormalizedUserName = "DBYALKOV",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJBg4xohcg6LGWqiNfKlyGHflzArAiRBWvuI9N74LMjMeKs2qA6/i2aksaAw9oiswA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "23fba16e-230c-4e34-b1e5-c5d40fcd5ba4",
+                            SecurityStamp = "f7233c94-d24c-4b26-a39f-9dfeda7e4280",
                             TwoFactorEnabled = false,
-                            UserName = "dbyalkov@abv.bg"
+                            UserName = "dbyalkov"
                         },
                         new
                         {
                             Id = "30342ffd-ffd8-4e66-9348-da6a2068856e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3b69b2ab-8872-41ae-aba2-3c4dc2251721",
+                            ConcurrencyStamp = "bf6fdee4-5d41-45cb-a30f-9f40f4a39047",
                             Email = "doomar@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             MiddleName = "Dimitrov",
                             NormalizedEmail = "DOOMAR@ABV.BG",
-                            NormalizedUserName = "DOOMAR@ABV.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGy/iFAX+rt9l+X5ggTKJFBXtkka7ZkH86cCkC7wJZbm68na+J4vIzpFbviCxxxhIQ==",
+                            NormalizedUserName = "D00M3R",
+                            PasswordHash = "AQAAAAEAACcQAAAAENLOQimYz3OLkiehZvFcBnvyvLTiQoUX6MYZJcnCupCV9W/5khge4328bv/uGt50Gw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "beda05f7-85ac-4913-b494-87583c0dd73e",
+                            SecurityStamp = "fbbdbc1d-1365-40e2-a6b1-0ed293c858f4",
                             TwoFactorEnabled = false,
-                            UserName = "doomar@abv.bg"
+                            UserName = "d00m3r"
                         },
                         new
                         {
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5c139c00-fe99-435c-b6cf-bca0a9c5463f",
+                            ConcurrencyStamp = "829f99ab-a753-46aa-9b47-0cd34d303f53",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             MiddleName = "Great",
                             NormalizedEmail = "ADMIN@MAIL.COM",
-                            NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG+SbfT/wDDPEYK79E3ciI9LCEjZmEhFWdemfqWZIyqDJNjZFtnsIy9ALDC5JPJTbg==",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAELWJ8sWHoba6HVajzMKNK2kmMa7G/GxAuzrMwBpGjsr987BLBssyrA5M/FM62u8LBw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "857b084a-550f-4d93-b413-fb1ed9241cee",
+                            SecurityStamp = "b8bd8e8a-6c63-4b69-80c8-41ec4e552e64",
                             TwoFactorEnabled = false,
-                            UserName = "admin@mail.com"
+                            UserName = "admnin"
                         });
                 });
 
