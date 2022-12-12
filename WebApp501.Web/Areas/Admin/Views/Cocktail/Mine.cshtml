@@ -1,0 +1,22 @@
+﻿@model MyCocktailsViewModel
+
+@{
+    ViewBag.Title = "My Cocktails";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<h4>My Added Cocktails</h4>
+
+@if (!Model.AddedCocktails.Any())
+{
+    <h2 class="text-center">You have no added cocktails yet!</h2>
+}
+
+<div class="row">
+    @foreach (var cocktail in Model.AddedCocktails)
+    {
+        @await Html.PartialAsync("~/Views/Cocktail/_CocktailPartial.cshtml", cocktail)
+    }
+</div>

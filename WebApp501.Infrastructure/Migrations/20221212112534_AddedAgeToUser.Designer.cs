@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp501.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using WebApp501.Infrastructure.Data;
 namespace WebApp501.Infrastructure.Migrations
 {
     [DbContext(typeof(WebAppDbContext))]
-    partial class WebAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221212112534_AddedAgeToUser")]
+    partial class AddedAgeToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -809,6 +811,9 @@ namespace WebApp501.Infrastructure.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -874,16 +879,17 @@ namespace WebApp501.Infrastructure.Migrations
                         {
                             Id = "726719c4-8995-4426-9c00-1cb0831621d4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "39b67afe-af21-4420-8408-218b36b8f803",
+                            Age = 0,
+                            ConcurrencyStamp = "08fe00cd-19af-4e68-9289-2dcdacf0d572",
                             Email = "dbyalkov@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             MiddleName = "Nikolaev",
                             NormalizedEmail = "DBYALKOV@ABV.BG",
                             NormalizedUserName = "DBYALKOV@ABV.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFm1unmTttcxbdIiDggwPcePrTE+odHnk0xJ5//NzDNoDLkFqXJHyt1Edpznb9YAZw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKtDNNmeKlGTGiKfOSRX2eis+1hKCxXwyTkpzHqNdKVTke6NrVktkPRMtBuJ9q+f1g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "82090113-2a0e-40d3-9a6b-22e4dbf48a68",
+                            SecurityStamp = "a2bce465-953b-44f0-bc7c-b9d34139d896",
                             TwoFactorEnabled = false,
                             UserName = "dbyalkov@abv.bg"
                         },
@@ -891,16 +897,17 @@ namespace WebApp501.Infrastructure.Migrations
                         {
                             Id = "30342ffd-ffd8-4e66-9348-da6a2068856e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "09bd55f7-1027-4422-afc1-1336f7ca2d6c",
+                            Age = 0,
+                            ConcurrencyStamp = "77ca963e-a46b-49f9-b173-c4343d65ba0d",
                             Email = "doomar@abv.bg",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             MiddleName = "Dimitrov",
                             NormalizedEmail = "DOOMAR@ABV.BG",
                             NormalizedUserName = "DOOMAR@ABV.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGugZ0tneCLJDf/wKXrIP9lRUw6tUg+M8ZplYSP8RV693639NYACLZApy031aA3+sg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAAXcI7tN7PLw7/e8UDgXi7vbPAGkWyUkCuxdB6aXryLBVHlfvOM1z6uaQLYw4y2jw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "87593415-f8d6-4bc5-b262-3ce669e797e7",
+                            SecurityStamp = "8364c8b1-c403-4712-b079-b710fc724536",
                             TwoFactorEnabled = false,
                             UserName = "doomar@abv.bg"
                         },
@@ -908,16 +915,17 @@ namespace WebApp501.Infrastructure.Migrations
                         {
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f59cf3c-6c24-40a5-84a8-f1b7e9e35294",
+                            Age = 0,
+                            ConcurrencyStamp = "c609c13a-247d-442b-85b6-e6d03ecf2bee",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             MiddleName = "Great",
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPNVokjTZFQEn8JnYmTNquEqTSZ+bxi+jYMEF78ASJinF81S/qUw/aluYqyg2yvLfA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJwIOKvgAy5KTQ1WQTJOToimAHSS0QO1T6ppJu73S8lSrWGd4dQcXL+7l98hE5aGMA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6e4ac389-5d86-407f-b18b-6f2a0c94a2c6",
+                            SecurityStamp = "2a05f06f-5ac1-4094-825a-5cbe2e68bfa6",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });

@@ -2,6 +2,7 @@
 
 using WebApp501.Core.Models.Bartender;
 using WebApp501.Core.Models.Cocktail;
+using WebApp501.Core.Models.User;
 using WebApp501.Infrastructure.Data.Entities;
 
 namespace WebApp501.Core.Extensions
@@ -25,6 +26,15 @@ namespace WebApp501.Core.Extensions
 
             this.CreateMap<TypeOfAlcohol, CocktailAlcoholServiceModel>();
             this.CreateMap<Glass, CocktailGlassServiceModel>();
+
+            this.CreateMap<Bartender, UserServiceModel>()
+                .ForMember(us => us.Email, config => config.MapFrom(b => b.User.Email))
+                .ForMember(us => us.FullName, config => config.MapFrom(b => $"{b.FirstName} {b.User.MiddleName.Trim()} {b.LastName}"));
+
+            this.CreateMap<User, UserServiceModel>()
+                .ForMember(us => us.UserId, config => config.MapFrom(u => u.Id))
+                .ForMember(us => us.FullName, config => config.MapFrom(u => u.MiddleName))
+                .ForMember(us => us.Age, config => config.MapFrom(u => 0));
         }
     }
 }

@@ -30,8 +30,4 @@
     <ProjectReference Include="..\WebApp501.WebApi\WebApp501.WebApi.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\" />
-  </ItemGroup>
-
 </Project>

@@ -9,13 +9,13 @@
             <h6>Recipe: <b>@Model.Recipe</b></h6>
             <h6>Preparation: <b>@Model.Preparation</b></h6>
             <br />
-            <a asp-controller="Cocktail" asp-action="Details" asp-route-id="@Model.Id"
+            <a asp-area="" asp-controller="Cocktail" asp-action="Details" asp-route-id="@Model.Id"
             asp-route-information="@Model.GetInformation()" class="btn btn-success">Details</a>
             @if (this.User.Identity.IsAuthenticated &&
                 (await this.cocktails.HasBartenderWithIdAsync(Model.Id, this.User.Id()) || this.User.IsAdmin()))
             {
-                <a asp-controller="Cocktail" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
-                <a asp-controller="Cocktail" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+                <a asp-area="" asp-controller="Cocktail" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+                <a asp-area="" asp-controller="Cocktail" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
             }
         </div>
     </div>

@@ -9,6 +9,8 @@ using WebApp501.Core.Models.Cocktail;
 using WebApp501.Web.Extensions;
 using WebApp501.Web.Models.Cocktail;
 
+using static WebApp501.Infrastructure.Data.AdminConstants;
+
 namespace WebApp501.Web.Controllers
 {
     [Authorize]
@@ -50,6 +52,11 @@ namespace WebApp501.Web.Controllers
 
         public async Task<IActionResult> Mine()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Mine", "Cocktail", new { area = "Admin" });
+            }
+
             IEnumerable<CocktailServiceModel>? myCocktails = null;
             var userId = this.User.Id();
 

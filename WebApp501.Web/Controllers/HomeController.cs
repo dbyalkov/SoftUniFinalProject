@@ -2,6 +2,8 @@
 
 using WebApp501.Core.Contracts;
 
+using static WebApp501.Infrastructure.Data.AdminConstants;
+
 namespace WebApp501.Web.Controllers
 {
     public class HomeController : Controller
@@ -14,7 +16,16 @@ namespace WebApp501.Web.Controllers
         }
 
         public async Task<IActionResult> Index()
-            => View(await this.cocktailService.LastTenCocktailsAsync());
+        {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
+            }
+
+            var cocktails = await this.cocktailService.LastTenCocktailsAsync();
+
+            return View(cocktails);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(int statusCode)
