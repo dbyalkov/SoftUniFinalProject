@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using WebApp501.Core.Contracts;
 using WebApp501.Core.Extensions;
 using WebApp501.Core.Models.Cocktail;
-using WebApp501.Extensions;
-using WebApp501.Models.Cocktail;
+using WebApp501.Web.Extensions;
+using WebApp501.Web.Models.Cocktail;
 
-namespace WebApp501.Controllers
+namespace WebApp501.Web.Controllers
 {
     [Authorize]
     public class CocktailController : Controller

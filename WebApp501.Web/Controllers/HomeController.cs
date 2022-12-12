@@ -2,7 +2,7 @@
 
 using WebApp501.Core.Contracts;
 
-namespace WebApp501.Controllers
+namespace WebApp501.Web.Controllers
 {
     public class HomeController : Controller
     {

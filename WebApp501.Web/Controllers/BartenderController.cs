@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 using WebApp501.Core.Constants;
 using WebApp501.Core.Contracts;
-using WebApp501.Extensions;
-using WebApp501.Models.Bartender;
+using WebApp501.Web.Extensions;
+using WebApp501.Web.Models.Bartender;
 
-namespace WebApp501.Controllers
+namespace WebApp501.Web.Controllers
 {
     [Authorize]
     public class BartenderController : Controller

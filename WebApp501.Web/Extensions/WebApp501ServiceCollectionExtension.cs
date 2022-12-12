@@ -2,7 +2,7 @@
 using WebApp501.Core.Services;
 using WebApp501.Infrastructure.Data.Common;
 
-namespace WebApp501.Extensions
+namespace WebApp501.Web.Extensions
 {
     public static class WebApp501ServiceCollectionExtension
     {

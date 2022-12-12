@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using WebApp501.Infrastructure.Data.Entities;
 
-namespace WebApp501.Areas.Identity.Pages.Account
+namespace WebApp501.Web.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LoginModel : PageModel

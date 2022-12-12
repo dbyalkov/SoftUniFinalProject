@@ -1,4 +1,4 @@
-﻿namespace WebApp501.Models.Cocktail
+﻿namespace WebApp501.Web.Models.Cocktail
 {
     public class CocktailDetailsViewModel
     {

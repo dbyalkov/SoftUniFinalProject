@@ -2,7 +2,7 @@
 
 using static WebApp501.Infrastructure.Data.DataConstants.Bartenders;
 
-namespace WebApp501.Models.Bartender
+namespace WebApp501.Web.Models.Bartender
 {
     public class BecomeBartenderFormModel
     {

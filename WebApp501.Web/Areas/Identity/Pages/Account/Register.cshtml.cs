@@ -12,7 +12,7 @@ using WebApp501.Infrastructure.Data.Entities;
 
 using static WebApp501.Infrastructure.Data.DataConstants.Users;
 
-namespace WebApp501.Areas.Identity.Pages.Account
+namespace WebApp501.Web.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {

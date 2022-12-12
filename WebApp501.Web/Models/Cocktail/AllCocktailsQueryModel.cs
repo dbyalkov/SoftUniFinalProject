@@ -1,6 +1,6 @@
 ﻿using WebApp501.Core.Models.Cocktail;
 
-namespace WebApp501.Models.Cocktail
+namespace WebApp501.Web.Models.Cocktail
 {
     public class AllCocktailsQueryModel
     {

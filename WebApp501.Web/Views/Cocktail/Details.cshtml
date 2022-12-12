@@ -1,5 +1,6 @@
 ﻿@model CocktailDetailsServiceModel
 @inject ICocktailService cocktails
+@inject IUserService users
 
 @{
 	ViewBag.Title = "Cocktail Details";
@@ -21,7 +22,7 @@
             <p>Type of Glass: <b>@Model.Glass</b></p>
             <div class="form-inline">
                 @if (this.User.Identity.IsAuthenticated &&
-                    (await this.cocktails.HasBartenderWithIdAsync(Model.Id, this.User.Id()) || this.User.IsAdmin()))
+                   (await this.cocktails.HasBartenderWithIdAsync(Model.Id, this.User.Id()) || this.User.IsAdmin()))
                 {
                     <a class="btn btn-warning" asp-controller="Cocktail" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
                     <a class="ml-2 btn btn-danger" asp-controller="Cocktail" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
@@ -35,7 +36,6 @@
                     {
                         <p class="card-text">Full Name: @Model.Bartender.FullName</p>
                     }
-                    <p class="card-text">UserName: @Model.Bartender.UserName</p>
                     <p class="card-text">Email: @Model.Bartender.Email</p>
                 </div>
             </div>

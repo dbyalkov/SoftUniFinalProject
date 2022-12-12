@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-using WebApp501.Extensions;
+using WebApp501.Web.Extensions;
 using WebApp501.Infrastructure.Data;
 using WebApp501.Infrastructure.Data.Entities;
 

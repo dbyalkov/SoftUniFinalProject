@@ -4,7 +4,7 @@ using WebApp501.Infrastructure.Data.Entities;
 
 using static WebApp501.Infrastructure.Data.AdminConstants;
 
-namespace WebApp501.Extensions
+namespace WebApp501.Web.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
