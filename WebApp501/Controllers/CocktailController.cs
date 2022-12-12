@@ -132,7 +132,7 @@ namespace WebApp501.Controllers
                 return RedirectToAction(nameof(All));
             }
 
-            if (!(await this.cocktailService.HasBartenderWithIdAsync(id, this.User.Id())))
+            if (!(await this.cocktailService.HasBartenderWithIdAsync(id, this.User.Id())) && !this.User.IsAdmin())
             {
                 return Unauthorized();
             }
@@ -168,7 +168,7 @@ namespace WebApp501.Controllers
                 return View();
             }
 
-            if (!(await this.cocktailService.HasBartenderWithIdAsync(id, this.User.Id())))
+            if (!(await this.cocktailService.HasBartenderWithIdAsync(id, this.User.Id())) && !this.User.IsAdmin())
             {
                 return Unauthorized();
             }
@@ -212,7 +212,7 @@ namespace WebApp501.Controllers
                 return RedirectToAction(nameof(All));
             }
 
-            if (!(await this.cocktailService.HasBartenderWithIdAsync(id, this.User.Id())))
+            if (!(await this.cocktailService.HasBartenderWithIdAsync(id, this.User.Id())) && !this.User.IsAdmin())
             {
                 return Unauthorized();
             }
@@ -237,7 +237,7 @@ namespace WebApp501.Controllers
                 return RedirectToAction(nameof(All));
             }
 
-            if (!(await this.cocktailService.HasBartenderWithIdAsync(model.Id, this.User.Id())))
+            if (!(await this.cocktailService.HasBartenderWithIdAsync(model.Id, this.User.Id())) && !this.User.IsAdmin())
             {
                 return Unauthorized();
             }
