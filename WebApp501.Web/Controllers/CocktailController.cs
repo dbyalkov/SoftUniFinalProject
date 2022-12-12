@@ -133,6 +133,8 @@ namespace WebApp501.Web.Controllers
 
             int newCocktailId = await this.cocktailService.CreateAsync(cocktail, bartenderId);
 
+            TempData["message"] = "You have successfully added a cocktail!";
+
             return RedirectToAction(nameof(Details), new { id = newCocktailId, information = cocktail.GetInformation() });
         }
 
@@ -219,6 +221,8 @@ namespace WebApp501.Web.Controllers
 
             await this.cocktailService.EditAsync(id, cocktail);
 
+            TempData["message"] = "You have successfully edited a cocktail!";
+
             return RedirectToAction(nameof(Details), new { id = id, information = cocktail.GetInformation() });
         }
 
@@ -263,6 +267,8 @@ namespace WebApp501.Web.Controllers
             }
 
             await this.cocktailService.DeleteAsync(model.Id);
+
+            TempData["message"] = "You have successfully deleted a cocktail!";
 
             return RedirectToAction(nameof(All));
         }

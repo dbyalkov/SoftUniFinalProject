@@ -7,10 +7,12 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Caching.Memory;
 
 using WebApp501.Infrastructure.Data.Entities;
 
 using static WebApp501.Infrastructure.Data.DataConstants.Users;
+using static WebApp501.Infrastructure.Data.AdminConstants;
 
 namespace WebApp501.Web.Areas.Identity.Pages.Account
 {
@@ -18,13 +20,16 @@ namespace WebApp501.Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<User> signInManager;
         private readonly UserManager<User> userManager;
+        private readonly IMemoryCache cache;
 
         public RegisterModel(
             UserManager<User> _userManager,
-            SignInManager<User> _signInManager)
+            SignInManager<User> _signInManager,
+            IMemoryCache _cache)
         {
             this.userManager = _userManager;
             this.signInManager = _signInManager;
+            this.cache = _cache;
         }
 
         /// <summary>
@@ -103,7 +108,9 @@ namespace WebApp501.Web.Areas.Identity.Pages.Account
                 {
                     await this.signInManager.SignInAsync(user, isPersistent: false);
 
-                    return LocalRedirect("~/Login");
+                    this.cache.Remove(UsersCacheKey);
+
+                    return LocalRedirect("/Identity/Account/Login");
                 }
                 foreach (var error in result.Errors)
                 {

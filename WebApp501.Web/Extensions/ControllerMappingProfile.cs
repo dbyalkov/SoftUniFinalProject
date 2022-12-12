@@ -9,7 +9,8 @@ namespace WebApp501.Web.Extensions
     {
         public ControllerMappingProfile()
         {
-            this.CreateMap<CocktailDetailsServiceModel, CocktailFormModel>();
+            this.CreateMap<CocktailDetailsServiceModel, CocktailFormModel>()
+                .ForMember(cf => cf.Image, config => config.MapFrom(cs => cs.ImageUrl));
             this.CreateMap<CocktailDetailsServiceModel, CocktailDetailsViewModel>();
         }
     }

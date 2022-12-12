@@ -9,5 +9,7 @@
         public const string AdminEmail = "admin@mail.com";
 
         public const string AdminNormalizedEmail = "ADMIN@MAIL.COM";
+
+        public const string UsersCacheKey = "UsersCacheKey";
     }
 }

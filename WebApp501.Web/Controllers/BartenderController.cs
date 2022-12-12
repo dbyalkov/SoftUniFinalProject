@@ -52,7 +52,9 @@ namespace WebApp501.Web.Controllers
 
             await this.bartenderService.CreateAsync(userId, bartender.FirstName, bartender.LastName, bartender.Age);
 
-            return RedirectToAction("All", "Cocktail");
+            TempData["message"] = "You have successfully become a bartender!";
+
+            return RedirectToAction(nameof(CocktailController.All), "Cocktail");
         }
     }
 }
