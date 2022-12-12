@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using WebApp501.Web.Extensions;
 using WebApp501.Infrastructure.Data;
 using WebApp501.Infrastructure.Data.Entities;
+using WebApp501.Web.Controllers;
+using WebApp501.Core.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +33,11 @@ builder.Services.AddControllersWithViews()
     });
 
 builder.Services.AddApplicationServices();
+
+builder.Services.AddAutoMapper(
+    typeof(ICocktailService).Assembly,
+    typeof(HomeController).Assembly);
+
 builder.Services.AddResponseCaching();
 
 var app = builder.Build();

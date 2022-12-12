@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+
+using Microsoft.EntityFrameworkCore;
 
 using WebApp501.Core.Contracts;
 using WebApp501.Core.Models.Bartender;
@@ -12,13 +15,16 @@ namespace WebApp501.Core.Services
     {
         private readonly IRepository repo;
         private readonly IBartenderService bartenders;
+        private readonly IMapper mapper;
 
         public CocktailService(
             IRepository _repo,
-            IBartenderService _bartenders)
+            IBartenderService _bartenders,
+            IMapper _mapper)
         {
             this.repo = _repo;
             this.bartenders = _bartenders;
+            this.mapper = _mapper;
         }
 
         public async Task<bool> AlcoholExistsAsync(int alcoholId)
@@ -68,14 +74,15 @@ namespace WebApp501.Core.Services
             result.Cocktails = await cocktails
                 .Skip((currentPage - 1) * cocktailsPerPage)
                 .Take(cocktailsPerPage)
-                .Select(c => new CocktailServiceModel()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Recipe = c.Recipe,
-                    Preparation = c.Preparation,
-                    ImageUrl = c.Image.ImageUrl
-                })
+                .ProjectTo<CocktailServiceModel>(this.mapper.ConfigurationProvider)
+                //.Select(c => new CocktailServiceModel()
+                //{
+                //    Id = c.Id,
+                //    Name = c.Name,
+                //    Recipe = c.Recipe,
+                //    Preparation = c.Preparation,
+                //    ImageUrl = c.Image.ImageUrl
+                //})
                 .ToListAsync();
 
             result.TotalCocktailsCount = await cocktails.CountAsync();
@@ -93,34 +100,37 @@ namespace WebApp501.Core.Services
             => await this.repo.AllReadonly<Cocktail>()
                 .Where(c => c.IsDeleted == false)
                 .Where(c => c.BartenderId == id)
-                .Select(c => new CocktailServiceModel()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Recipe = c.Recipe,
-                    Preparation = c.Preparation,
-                    ImageUrl = c.Image.ImageUrl
-                })
+                .ProjectTo<CocktailServiceModel>(this.mapper.ConfigurationProvider)
+                //.Select(c => new CocktailServiceModel()
+                //{
+                //    Id = c.Id,
+                //    Name = c.Name,
+                //    Recipe = c.Recipe,
+                //    Preparation = c.Preparation,
+                //    ImageUrl = c.Image.ImageUrl
+                //})
                 .ToListAsync();
 
         public async Task<IEnumerable<CocktailGlassServiceModel>> AllGlassesAsync()
             => await this.repo.AllReadonly<Glass>()
                 .OrderBy(g => g.Name)
-                .Select(g => new CocktailGlassServiceModel()
-                {
-                    Id = g.Id,
-                    Name = g.Name
-                })
+                .ProjectTo<CocktailGlassServiceModel>(this.mapper.ConfigurationProvider)
+                //.Select(g => new CocktailGlassServiceModel()
+                //{
+                //    Id = g.Id,
+                //    Name = g.Name
+                //})
                 .ToListAsync();
 
         public async Task<IEnumerable<CocktailAlcoholServiceModel>> AllTypesOfAlcoholAsync()
             => await this.repo.AllReadonly<TypeOfAlcohol>()
                 .OrderBy(a => a.Name)
-                .Select(a => new CocktailAlcoholServiceModel()
-                {
-                    Id = a.Id,
-                    Name = a.Name
-                })
+                .ProjectTo<CocktailAlcoholServiceModel>(this.mapper.ConfigurationProvider)
+                //.Select(a => new CocktailAlcoholServiceModel()
+                //{
+                //    Id = a.Id,
+                //    Name = a.Name
+                //})
                 .ToListAsync();
 
         public async Task<CocktailDetailsServiceModel> CocktailDetailsByIdAsync(int id)
@@ -205,14 +215,15 @@ namespace WebApp501.Core.Services
             return await this.repo.AllReadonly<Cocktail>()
                 .Where(c => c.IsDeleted == false)
                 .OrderByDescending(c => c.Id)
-                .Select(c => new CocktailIndexServiceModel()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    ImageUrl = c.Image.ImageUrl,
-                    Recipe = c.Recipe,
-                    Preparation = c.Preparation
-                })
+                .ProjectTo<CocktailIndexServiceModel>(this.mapper.ConfigurationProvider)
+                //.Select(c => new CocktailIndexServiceModel()
+                //{
+                //    Id = c.Id,
+                //    Name = c.Name,
+                //    Recipe = c.Recipe,
+                //    Preparation = c.Preparation,
+                //    ImageUrl = c.Image.ImageUrl
+                //})
                 .Take(10)
                 .ToListAsync();
         }

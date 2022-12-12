@@ -79,7 +79,7 @@ namespace WebApp501.Web.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public void OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
         }

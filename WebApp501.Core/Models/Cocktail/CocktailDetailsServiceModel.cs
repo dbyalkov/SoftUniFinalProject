@@ -8,6 +8,6 @@ namespace WebApp501.Core.Models.Cocktail
 
         public string Glass { get; init; } = null!;
 
-        public BartenderServiceModel Bartender { get; init; } = null!;
+        public BartenderServiceModel Bartender { get; set; } = null!;
     }
 }

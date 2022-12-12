@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using WebApp501.Core.Contracts;
@@ -14,13 +16,16 @@ namespace WebApp501.Web.Controllers
     {
         private readonly ICocktailService cocktailService;
         private readonly IBartenderService bartenderService;
+        private readonly IMapper mapper;
 
         public CocktailController(
             ICocktailService _cocktailService,
-            IBartenderService _bartenderService)
+            IBartenderService _bartenderService,
+            IMapper _mapper)
         {
             this.cocktailService = _cocktailService;
             this.bartenderService = _bartenderService;
+            this.mapper = _mapper;
         }
 
         [HttpGet]
@@ -141,18 +146,24 @@ namespace WebApp501.Web.Controllers
             var cocktailAlcoholId = await this.cocktailService.GetCocktailAlcoholIdAsync(cocktail.Id);
             var cocktailGlassId = await this.cocktailService.GetCocktailGlassIdAsync(cocktail.Id);
 
-            var model = new CocktailFormModel()
-            {
-                Id = id,
-                Name = cocktail.Name,
-                Recipe = cocktail.Recipe,
-                Preparation = cocktail.Preparation,
-                AlcoholId = cocktailAlcoholId,
-                GlassId = cocktailGlassId,
-                Image = cocktail.ImageUrl,
-                Alcohols = await this.cocktailService.AllTypesOfAlcoholAsync(),
-                Glasses = await this.cocktailService.AllGlassesAsync()
-            };
+            //var model = new CocktailFormModel()
+            //{
+            //    Id = id,
+            //    Name = cocktail.Name,
+            //    Recipe = cocktail.Recipe,
+            //    Preparation = cocktail.Preparation,
+            //    AlcoholId = cocktailAlcoholId,
+            //    GlassId = cocktailGlassId,
+            //    Image = cocktail.ImageUrl,
+            //    Alcohols = await this.cocktailService.AllTypesOfAlcoholAsync(),
+            //    Glasses = await this.cocktailService.AllGlassesAsync()
+            //};
+
+            var model = this.mapper.Map<CocktailFormModel>(cocktail);
+            model.AlcoholId = cocktailAlcoholId;
+            model.GlassId = cocktailGlassId;
+            model.Alcohols = await this.cocktailService.AllTypesOfAlcoholAsync();
+            model.Glasses = await this.cocktailService.AllGlassesAsync();
 
             return View(model);
         }
@@ -219,11 +230,13 @@ namespace WebApp501.Web.Controllers
 
             var cocktail = await this.cocktailService.CocktailDetailsByIdAsync(id);
 
-            var model = new CocktailDetailsViewModel()
-            {
-                Name = cocktail.Name,
-                ImageUrl = cocktail.ImageUrl
-            };
+            //var model = new CocktailDetailsViewModel()
+            //{
+            //    Name = cocktail.Name,
+            //    ImageUrl = cocktail.ImageUrl
+            //};
+
+            var model = this.mapper.Map<CocktailDetailsViewModel>(cocktail);
 
             return View(model);
         }
