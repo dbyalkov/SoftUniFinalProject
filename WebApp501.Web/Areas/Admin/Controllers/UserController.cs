@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 
+using WebApp501.Core.Constants;
 using WebApp501.Core.Contracts;
 using WebApp501.Core.Models.User;
 
@@ -37,6 +38,23 @@ namespace WebApp501.Web.Areas.Admin.Controllers
             }
 
             return View(appUsers);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Forget(string userId)
+        {
+            bool result = await this.users.Forget(userId);
+
+            if (result)
+            {
+                TempData["message"] = "User is now forgotten!";
+            }
+            else
+            {
+                TempData["message"] = "User is unforgetable!";
+            }
+
+            return RedirectToAction(nameof(All));
         }
     }
 }

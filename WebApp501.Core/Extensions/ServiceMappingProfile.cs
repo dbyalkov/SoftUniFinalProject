@@ -34,7 +34,8 @@ namespace WebApp501.Core.Extensions
             this.CreateMap<User, UserServiceModel>()
                 .ForMember(us => us.UserId, config => config.MapFrom(u => u.Id))
                 .ForMember(us => us.FullName, config => config.MapFrom(u => u.MiddleName))
-                .ForMember(us => us.Age, config => config.MapFrom(u => 0));
+                .ForMember(us => us.Age, config => config.MapFrom(u => 0))
+                .ForMember(us => us.IsDeleted, config => config.MapFrom(u => u.IsDeleted));
         }
     }
 }

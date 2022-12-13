@@ -14,16 +14,13 @@ namespace WebApp501.Core.Services
     public class CocktailService : ICocktailService
     {
         private readonly IRepository repo;
-        private readonly IBartenderService bartenders;
         private readonly IMapper mapper;
 
         public CocktailService(
             IRepository _repo,
-            IBartenderService _bartenders,
             IMapper _mapper)
         {
             this.repo = _repo;
-            this.bartenders = _bartenders;
             this.mapper = _mapper;
         }
 

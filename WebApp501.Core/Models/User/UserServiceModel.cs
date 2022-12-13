@@ -9,5 +9,7 @@
         public string? FullName { get; init; } = null;
 
         public int Age { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

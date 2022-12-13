@@ -7,5 +7,7 @@ namespace WebApp501.Core.Contracts
         Task<string> UserNameAsync(string userid);
 
         Task<IEnumerable<UserServiceModel>> All();
+
+        Task<bool> Forget(string userId);
     }
 }

@@ -23,7 +23,6 @@ namespace WebApp501.Core.Services
                 .CountAsync();
 
             int totalBartenders = await this.repo.AllReadonly<Bartender>()
-                .Where(b => b.IsDeleted == false)
                 .CountAsync();
 
             return new StatisticsServiceModel()
