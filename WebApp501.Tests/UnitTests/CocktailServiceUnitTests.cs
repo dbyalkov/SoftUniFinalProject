@@ -77,7 +77,7 @@ namespace WebApp501.Tests.UnitTests
         public async Task All_ShouldReturnCorrectCocktails()
         {
             //Arrange
-            var searchTerm = "Cocktail";
+            var searchTerm = "Gauguin";
 
             //Act
             var result = await this.cocktailService.AllAsync(null, null, searchTerm);
@@ -87,8 +87,16 @@ namespace WebApp501.Tests.UnitTests
                 .Where(c => c.Name.Contains(searchTerm));
             Assert.That(result.TotalCocktailsCount, Is.EqualTo(cocktailsInDb.Count()));
 
-            //Assert
+            //Assert a returned cocktail data is correct
+            var resultCocktail = result.Cocktails.FirstOrDefault();
+            Assert.IsNotNull(result);
 
+            var cocktailInDb = cocktailsInDb.FirstOrDefault();
+            Assert.Multiple(() =>
+            {
+                Assert.That(resultCocktail.Id, Is.EqualTo(cocktailInDb.Id));
+                Assert.That(resultCocktail.Name, Is.EqualTo(cocktailInDb.Name));
+            });
         }
     }
 }
