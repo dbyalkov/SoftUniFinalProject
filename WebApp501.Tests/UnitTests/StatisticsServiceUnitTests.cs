@@ -1,6 +1,7 @@
 ﻿using WebApp501.Core.Contracts;
 using WebApp501.Core.Services;
 using WebApp501.Infrastructure.Data.Entities;
+using WebApp501.Tests.Common;
 
 namespace WebApp501.Tests.UnitTests
 {

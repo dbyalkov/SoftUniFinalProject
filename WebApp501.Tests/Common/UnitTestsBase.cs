@@ -4,10 +4,9 @@ using EasyRank.Tests.Common.Mocks;
 
 using WebApp501.Infrastructure.Data;
 using WebApp501.Infrastructure.Data.Common;
-using WebApp501.Tests.Common;
 using WebApp501.Tests.Common.Mocks;
 
-namespace WebApp501.Tests.UnitTests
+namespace WebApp501.Tests.Common
 {
     public class UnitTestsBase
     {
@@ -19,16 +18,16 @@ namespace WebApp501.Tests.UnitTests
         [OneTimeSetUp]
         public void SetUpBase()
         {
-            this.dbContext = DatabaseMock.Instance;
-            this.testDb = new WebApp501TestDb(this.dbContext);
-            this.mapper = MapperMock.Instance;
-            this.repo = new RepoMock(this.dbContext);
+            dbContext = DatabaseMock.Instance;
+            testDb = new WebApp501TestDb(dbContext);
+            mapper = MapperMock.Instance;
+            repo = new RepoMock(dbContext);
         }
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            this.dbContext.Dispose();
+            dbContext.Dispose();
         }
     }
 }

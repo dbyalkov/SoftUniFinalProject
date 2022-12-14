@@ -10,7 +10,7 @@ namespace WebApp501.Tests.Common
             this.SeedDatabase(dbContext);
         }
 
-        public Bartender Bartender { get; private set; } = null!;
+        public List<Bartender> Bartenders { get; private set; } = null!;
 
         public List<TypeOfAlcohol> Alcohols { get; private set; } = null!;
 
@@ -22,21 +22,24 @@ namespace WebApp501.Tests.Common
 
         private void SeedDatabase(WebAppDbContext dbContext)
         {
-            this.Bartender = new Bartender()
+            this.Bartenders = new List<Bartender>()
             {
-                Id = 1,
-                FirstName = "Georgi",
-                LastName = "Petrov",
-                Age = 20,
-                User = new User()
+                new Bartender()
                 {
-                    Id = "FirstBartenderUserId",
-                    Email = "georgi@mail.com",
-                    MiddleName = "Ivanov"
+                    Id = 1,
+                    FirstName = "Georgi",
+                    LastName = "Petrov",
+                    Age = 20,
+                    User = new User()
+                    {
+                        Id = "FirstBartenderUserId",
+                        Email = "georgi@mail.com",
+                        MiddleName = "Ivanov"
+                    }
                 }
             };
 
-            dbContext.Add<Bartender>(this.Bartender);
+            dbContext.AddRange(this.Bartenders);
 
             this.Alcohols = new List<TypeOfAlcohol>()
             {
