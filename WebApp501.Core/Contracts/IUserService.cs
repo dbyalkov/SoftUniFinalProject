@@ -4,9 +4,9 @@ namespace WebApp501.Core.Contracts
 {
     public interface IUserService
     {
-        Task<string> UserNameAsync(string userid);
-
         Task<IEnumerable<UserServiceModel>> All();
+
+        Task<string> UserNameAsync(string userid);
 
         Task<bool> Forget(string userId);
     }

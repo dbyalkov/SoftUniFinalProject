@@ -7,6 +7,7 @@ using WebApp501.Tests.Common;
 
 namespace WebApp501.Tests.UnitTests
 {
+    [TestFixture]
     public class UserServiceUnitTests : UnitTestsBase
     {
         private new UserManager<User> userManager;
@@ -44,31 +45,6 @@ namespace WebApp501.Tests.UnitTests
                 .FirstOrDefault(b => b.Email == bartender.User.Email);
             Assert.IsNotNull(bartenderUser);
             Assert.That(bartenderUser.Age, Is.EqualTo(bartender.Age));
-        }
-
-        [Test]
-        public async Task Forget_ShouldReturnTrue()
-        {
-            //Arrange
-            string userId = "GuestUserId";
-
-            //Act
-            var usersBeforeForget = this.repo.AllReadonly<User>()
-                .Where(u => !u.IsDeleted)
-                .Count();
-
-            var result = await this.userService.Forget(userId);
-
-            await this.repo.SaveChangesAsync();
-
-            //Assert
-            Assert.IsTrue(result);
-
-            //Assert
-            var usersAfterForget = this.repo.AllReadonly<User>()
-                .Where(u => !u.IsDeleted)
-                .Count();
-            Assert.That(usersAfterForget + 1, Is.EqualTo(usersBeforeForget));
         }
 
         [Test]

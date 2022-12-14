@@ -46,6 +46,22 @@ namespace WebApp501.Core.Services
             return result;
         }
 
+        public async Task<string> UserNameAsync(string userId)
+        {
+            var user = await repo.GetByIdAsync<User>(userId);
+
+            if (user.UserName.Contains('@'))
+            {
+                int startIndex = user.UserName.IndexOf('@');
+
+                var userName = user.UserName.Remove(startIndex);
+
+                return userName;
+            }
+
+            return user.UserName;
+        }
+
         public async Task<bool> Forget(string userId)
         {
             var user = await this.userManager.FindByIdAsync(userId);
@@ -61,22 +77,6 @@ namespace WebApp501.Core.Services
             var result = await this.userManager.UpdateAsync(user);
 
             return result.Succeeded;
-        }
-
-        public async Task<string> UserNameAsync(string userId)
-        {
-            var user = await repo.GetByIdAsync<User>(userId);
-
-            if (user.UserName.Contains('@'))
-            {
-                int startIndex = user.UserName.IndexOf('@');
-
-                var userName = user.UserName.Remove(startIndex);
-
-                return userName;
-            }
-
-            return user.UserName;
         }
     }
 }
