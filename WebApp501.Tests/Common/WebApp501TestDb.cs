@@ -482,6 +482,7 @@ namespace WebApp501.Tests.Common
             {
                 Id = "GuestUserId",
                 Email = "guestUser@mail.com",
+                UserName = "guestUser@mail.com",
                 MiddleName = "Guest"
             };
 
