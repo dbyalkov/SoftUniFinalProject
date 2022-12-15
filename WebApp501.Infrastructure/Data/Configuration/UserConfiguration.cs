@@ -8,6 +8,9 @@ using static WebApp501.Infrastructure.Data.AdminConstants;
 
 namespace WebApp501.Infrastructure.Data.Configuration
 {
+    /// <summary>
+    /// Adds seed data to this entity type.
+    /// </summary>
     internal class UserConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)

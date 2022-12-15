@@ -1,5 +1,8 @@
 ﻿namespace WebApp501.Infrastructure.Data
 {
+    /// <summary>
+    /// Class holding data constraints for the admin user.
+    /// </summary>
     public class AdminConstants
     {
         public const string AreaName = "Admin";

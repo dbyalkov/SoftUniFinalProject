@@ -5,6 +5,9 @@ using WebApp501.Infrastructure.Data.Entities;
 
 namespace WebApp501.Infrastructure.Data.Configuration
 {
+    /// <summary>
+    /// Adds seed data to this entity type.
+    /// </summary>
     internal class BartenderConfiguration : IEntityTypeConfiguration<Bartender>
     {
         public void Configure(EntityTypeBuilder<Bartender> builder)
