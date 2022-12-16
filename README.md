@@ -14,7 +14,7 @@ Users can  **view / create / edit / delete**  "Cocktails".
 -   All authorized users can become bartenders and add their own cocktails;
 -   Created cocktails are saved for all  bartenders;
 -   Cocktails may be edited or deleted only by their creator or by the administrator;
--   Cocktails can have names, recipes, preparation, who are they created from and more;
+-   Cocktails can have names, recipes, preparation, who are they created by and more;
 -   Administrators have full access to the site. Editing, deleting cocktails or users.
 
 ### User Types
