@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-using WebApp501.Core.Constants;
 using WebApp501.Core.Contracts;
 using WebApp501.Web.Extensions;
 using WebApp501.Web.Models.Bartender;
@@ -23,7 +22,7 @@ namespace WebApp501.Web.Controllers
         {
             if (await this.bartenderService.ExistsByIdAsync(User.Id()))
             {
-                TempData[MessageConstant.ErrorMessage] = "You are already a bartender.";
+                TempData["message"] = "You are already a bartender.";
 
                 return RedirectToAction("Index", "Home");
             }
@@ -40,7 +39,7 @@ namespace WebApp501.Web.Controllers
 
             if (await this.bartenderService.ExistsByIdAsync(userId))
             {
-                TempData[MessageConstant.ErrorMessage] = "You are already a bartender.";
+                TempData["message"] = "You are already a bartender.";
 
                 return RedirectToAction("Index", "Home");
             }

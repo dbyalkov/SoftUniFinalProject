@@ -11,11 +11,21 @@ using WebApp501.Infrastructure.Data.Entities;
 
 namespace WebApp501.Core.Services
 {
+    /// <summary>
+    /// The CocktailService class responsible for dealing with cocktail related business.
+    /// </summary>
+    /// <remarks>Implementation of <see cref="ICocktailService"/>.</remarks>
     public class CocktailService : ICocktailService
     {
         private readonly IRepository repo;
         private readonly IMapper mapper;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CocktailService"/> class.
+        /// Constructor for the cocktail service class.
+        /// </summary>
+        /// <param name="_repo">The implementation of a repository to be used.</param>
+        /// <param name="_mapper">Instance of an AutoMapper.</param>
         public CocktailService(
             IRepository _repo,
             IMapper _mapper)
@@ -24,9 +34,11 @@ namespace WebApp501.Core.Services
             this.mapper = _mapper;
         }
 
+        /// <inheritdoc />
         public async Task<bool> AlcoholExistsAsync(int alcoholId)
             => await this.repo.AllReadonly<TypeOfAlcohol>().AnyAsync(a => a.Id == alcoholId);
 
+        /// <inheritdoc />
         public async Task<CocktailsQueryServiceModel> AllAsync(
             string? alcohol = null,
             string? glass = null,
@@ -87,12 +99,14 @@ namespace WebApp501.Core.Services
             return result;
         }
 
+        /// <inheritdoc />
         public async Task<IEnumerable<string>> AllAlcoholsNamesAsync()
             => await this.repo.AllReadonly<TypeOfAlcohol>()
                 .Select(a => a.Name)
                 .Distinct()
                 .ToListAsync();
 
+        /// <inheritdoc />
         public async Task<IEnumerable<CocktailServiceModel>> AllCocktailsByBartenderIdAsync(int id)
             => await this.repo.AllReadonly<Cocktail>()
                 .Where(c => c.IsDeleted == false)
@@ -108,6 +122,7 @@ namespace WebApp501.Core.Services
                 //})
                 .ToListAsync();
 
+        /// <inheritdoc />
         public async Task<IEnumerable<CocktailGlassServiceModel>> AllGlassesAsync()
             => await this.repo.AllReadonly<Glass>()
                 .OrderBy(g => g.Name)
@@ -119,6 +134,7 @@ namespace WebApp501.Core.Services
                 //})
                 .ToListAsync();
 
+        /// <inheritdoc />
         public async Task<IEnumerable<CocktailAlcoholServiceModel>> AllTypesOfAlcoholAsync()
             => await this.repo.AllReadonly<TypeOfAlcohol>()
                 .OrderBy(a => a.Name)
@@ -130,6 +146,7 @@ namespace WebApp501.Core.Services
                 //})
                 .ToListAsync();
 
+        /// <inheritdoc />
         public async Task<CocktailDetailsServiceModel> CocktailDetailsByIdAsync(int id)
             => await this.repo.AllReadonly<Cocktail>()
                 .Where(c => c.IsDeleted == false)
@@ -152,6 +169,7 @@ namespace WebApp501.Core.Services
                 })
                 .FirstAsync();
 
+        /// <inheritdoc />
         public async Task<int> CreateAsync(CocktailFormModel model, int bartenderId)
         {
             var cocktail = new Cocktail()
@@ -174,6 +192,7 @@ namespace WebApp501.Core.Services
             return cocktail.Id;
         }
 
+        /// <inheritdoc />
         public async Task DeleteAsync(int cocktailId)
         {
             var cocktail = await this.repo.GetByIdAsync<Cocktail>(cocktailId);
@@ -182,6 +201,7 @@ namespace WebApp501.Core.Services
             await this.repo.SaveChangesAsync();
         }
 
+        /// <inheritdoc />
         public async Task EditAsync(int cocktailId, CocktailFormModel model)
         {
             var cocktail = await this.repo.GetByIdAsync<Cocktail>(cocktailId);
@@ -195,18 +215,23 @@ namespace WebApp501.Core.Services
             await this.repo.SaveChangesAsync();
         }
 
+        /// <inheritdoc />
         public async Task<bool> ExistsAsync(int id)
             => await this.repo.AllReadonly<Cocktail>().AnyAsync(c => c.Id == id && c.IsDeleted == false);
 
+        /// <inheritdoc />
         public async Task<int> GetCocktailAlcoholIdAsync(int cocktailId)
             => (await this.repo.GetByIdAsync<Cocktail>(cocktailId)).AlcoholId;
 
+        /// <inheritdoc />
         public async Task<int> GetCocktailGlassIdAsync(int cocktailId)
             => (await this.repo.GetByIdAsync<Cocktail>(cocktailId)).GlassId;
 
+        /// <inheritdoc />
         public async Task<bool> GlassExistsAsync(int glassId)
             => await this.repo.AllReadonly<Glass>().AnyAsync(g => g.Id == glassId);
 
+        /// <inheritdoc />
         public async Task<IEnumerable<CocktailIndexServiceModel>> LastTenCocktailsAsync()
         {
             return await this.repo.AllReadonly<Cocktail>()
@@ -225,12 +250,14 @@ namespace WebApp501.Core.Services
                 .ToListAsync();
         }
 
+        /// <inheritdoc />
         public async Task<IEnumerable<string>> AllGlassesNamesAsync()
             => await this.repo.AllReadonly<Glass>()
                 .Select(g => g.Name)
                 .Distinct()
                 .ToListAsync();
 
+        /// <inheritdoc />
         public async Task<bool> HasBartenderWithIdAsync(int cocktailId, string currUserId)
         {
             var cocktail = await this.repo.GetByIdAsync<Cocktail>(cocktailId);

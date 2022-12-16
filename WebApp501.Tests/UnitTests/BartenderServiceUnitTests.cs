@@ -34,14 +34,13 @@ namespace WebApp501.Tests.UnitTests
         {
             //Arrange
             int bartenderId = 1;
-            string userId = (await this.repo.GetByIdAsync<Bartender>(bartenderId)).UserId;
 
             //Act
-            var resultBartenderCocktails = await this.bartenderService.UsersCocktailsAsync(userId);
+            var resultBartenderCocktails = await this.bartenderService.BartenderCocktailsAsync(bartenderId);
 
             //Assert
             var bartenderCocktails = this.repo.AllReadonly<Cocktail>()
-                .Where(c => c.Bartender.UserId == userId)
+                .Where(c => c.Bartender.Id == bartenderId)
                 .Count();
             Assert.That(resultBartenderCocktails, Is.EqualTo(bartenderCocktails));
         }

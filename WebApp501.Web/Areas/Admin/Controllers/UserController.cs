@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 
-using WebApp501.Core.Constants;
 using WebApp501.Core.Contracts;
 using WebApp501.Core.Models.User;
 

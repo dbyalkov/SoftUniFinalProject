@@ -11,12 +11,23 @@ using WebApp501.Infrastructure.Data.Entities;
 
 namespace WebApp501.Core.Services
 {
+    /// <summary>
+    /// The UserService class responsible for dealing with user related business.
+    /// </summary>
+    /// <remarks>Implementation of <see cref="IUserService"/>.</remarks>
     public class UserService : IUserService
     {
         private readonly IRepository repo;
         private readonly UserManager<User> userManager;
         private readonly IMapper mapper;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserService"/> class.
+        /// Constructor for the statistics service class.
+        /// </summary>
+        /// <param name="_repo">The implementation of a repository to be used.</param>
+        /// <param name="_userManager">Instance of an UserManager.</param>
+        /// <param name="_mapper">Instance of an AutoMapper.</param>
         public UserService(
             IRepository _repo,
             UserManager<User> _userManager,
@@ -27,6 +38,7 @@ namespace WebApp501.Core.Services
             this.mapper = _mapper;
         }
 
+        /// <inheritdoc />
         public async Task<IEnumerable<UserServiceModel>> All()
         {
             List<UserServiceModel> result;
@@ -46,6 +58,7 @@ namespace WebApp501.Core.Services
             return result;
         }
 
+        /// <inheritdoc />
         public async Task<string> UserNameAsync(string userId)
         {
             var user = await repo.GetByIdAsync<User>(userId);
@@ -62,6 +75,7 @@ namespace WebApp501.Core.Services
             return user.UserName;
         }
 
+        /// <inheritdoc />
         public async Task<bool> Forget(string userId)
         {
             var user = await this.userManager.FindByIdAsync(userId);
